@@ -1,0 +1,1616 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex,nofollow">
+  <title>ZIEGENX CRM</title>
+
+  <style>
+    *{
+      box-sizing:border-box;
+      margin:0;
+      padding:0;
+    }
+
+    :root{
+      --bg:#071827;
+      --sidebar:#061522;
+      --card:#0d2235;
+      --card2:#102a40;
+      --line:#1d3a50;
+      --blue:#199bf2;
+      --cyan:#29c4f6;
+      --text:#f4f8fb;
+      --muted:#8fa8ba;
+      --green:#27d17f;
+      --yellow:#f5c451;
+      --red:#ff6b6b;
+    }
+
+    body{
+      font-family:Inter,Arial,sans-serif;
+      background:#f3f7fa;
+      color:#152536;
+    }
+
+    button,input,select,textarea{
+      font:inherit;
+    }
+
+    /* LOGIN */
+
+    #loginScreen{
+      min-height:100vh;
+      background:
+        radial-gradient(circle at 75% 30%,rgba(31,180,244,.18),transparent 35%),
+        linear-gradient(135deg,#041421,#08243a);
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      padding:25px;
+    }
+
+    .login-box{
+      width:100%;
+      max-width:430px;
+      background:white;
+      border-radius:25px;
+      padding:42px;
+      box-shadow:0 25px 70px rgba(0,0,0,.35);
+    }
+
+    .login-logo{
+      font-size:30px;
+      font-weight:900;
+      letter-spacing:3px;
+      color:#071827;
+      margin-bottom:8px;
+    }
+
+    .login-logo span{
+      color:var(--blue);
+    }
+
+    .login-box h2{
+      margin-top:28px;
+      font-size:27px;
+    }
+
+    .login-box p{
+      color:#6c7c89;
+      margin:8px 0 28px;
+      line-height:1.5;
+    }
+
+    .field{
+      margin-bottom:18px;
+    }
+
+    .field label{
+      display:block;
+      font-weight:700;
+      margin-bottom:8px;
+      font-size:14px;
+    }
+
+    .field input,
+    .field select,
+    .field textarea{
+      width:100%;
+      border:1px solid #d7e0e7;
+      border-radius:12px;
+      padding:14px;
+      outline:none;
+      transition:.2s;
+    }
+
+    .field input:focus,
+    .field select:focus,
+    .field textarea:focus{
+      border-color:var(--blue);
+      box-shadow:0 0 0 3px rgba(25,155,242,.1);
+    }
+
+    .login-button{
+      width:100%;
+      border:0;
+      background:linear-gradient(90deg,#168ef0,#27c3f3);
+      color:white;
+      padding:15px;
+      border-radius:12px;
+      font-weight:800;
+      cursor:pointer;
+      font-size:16px;
+    }
+
+    .login-demo{
+      margin-top:20px;
+      padding:12px;
+      background:#eef8ff;
+      color:#31739d;
+      border-radius:10px;
+      font-size:12px;
+      text-align:center;
+    }
+
+    /* APP */
+
+    #app{
+      display:none;
+      min-height:100vh;
+    }
+
+    .sidebar{
+      position:fixed;
+      left:0;
+      top:0;
+      bottom:0;
+      width:245px;
+      background:var(--sidebar);
+      color:white;
+      padding:27px 18px;
+      z-index:50;
+    }
+
+    .brand{
+      font-size:25px;
+      font-weight:900;
+      letter-spacing:3px;
+      padding:0 13px 30px;
+    }
+
+    .brand span{
+      color:var(--cyan);
+    }
+
+    .menu-title{
+      color:#526f82;
+      text-transform:uppercase;
+      font-size:10px;
+      letter-spacing:2px;
+      margin:12px 13px;
+      font-weight:800;
+    }
+
+    .nav-item{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      color:#9db1c0;
+      padding:13px 14px;
+      border-radius:11px;
+      margin:3px 0;
+      cursor:pointer;
+      font-weight:600;
+      transition:.2s;
+    }
+
+    .nav-item:hover{
+      background:#0d273a;
+      color:white;
+    }
+
+    .nav-item.active{
+      color:white;
+      background:linear-gradient(90deg,#118de5,#18b9ef);
+      box-shadow:0 8px 25px rgba(20,161,232,.22);
+    }
+
+    .nav-icon{
+      width:22px;
+      text-align:center;
+    }
+
+    .sidebar-bottom{
+      position:absolute;
+      bottom:20px;
+      left:18px;
+      right:18px;
+    }
+
+    .user-mini{
+      background:#0c2233;
+      border:1px solid #17364b;
+      border-radius:13px;
+      padding:12px;
+      display:flex;
+      gap:10px;
+      align-items:center;
+    }
+
+    .avatar{
+      width:38px;
+      height:38px;
+      border-radius:50%;
+      background:linear-gradient(135deg,var(--blue),var(--cyan));
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-weight:900;
+    }
+
+    .user-mini strong{
+      font-size:13px;
+      display:block;
+    }
+
+    .user-mini small{
+      color:#7792a5;
+    }
+
+    .main{
+      margin-left:245px;
+      min-height:100vh;
+    }
+
+    .topbar{
+      height:76px;
+      background:white;
+      border-bottom:1px solid #e4ebf0;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:0 32px;
+      position:sticky;
+      top:0;
+      z-index:30;
+    }
+
+    .search{
+      width:330px;
+      background:#f3f7fa;
+      border:1px solid #e1e9ef;
+      border-radius:11px;
+      padding:11px 15px;
+    }
+
+    .top-actions{
+      display:flex;
+      gap:12px;
+      align-items:center;
+    }
+
+    .notification{
+      width:42px;
+      height:42px;
+      border-radius:11px;
+      border:1px solid #e2e9ee;
+      background:white;
+      cursor:pointer;
+      position:relative;
+    }
+
+    .notification:after{
+      content:"3";
+      position:absolute;
+      right:-5px;
+      top:-6px;
+      width:18px;
+      height:18px;
+      background:#ff6262;
+      color:white;
+      border-radius:50%;
+      font-size:10px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-weight:bold;
+    }
+
+    .new-button{
+      border:0;
+      border-radius:11px;
+      background:var(--blue);
+      color:white;
+      padding:12px 18px;
+      font-weight:800;
+      cursor:pointer;
+    }
+
+    .content{
+      padding:30px 32px 50px;
+    }
+
+    .page{
+      display:none;
+    }
+
+    .page.active{
+      display:block;
+    }
+
+    .heading{
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-start;
+      margin-bottom:25px;
+    }
+
+    .heading h1{
+      font-size:27px;
+      margin-bottom:6px;
+    }
+
+    .heading p{
+      color:#718391;
+    }
+
+    /* METRICS */
+
+    .metrics{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:18px;
+      margin-bottom:22px;
+    }
+
+    .metric{
+      background:white;
+      border:1px solid #e3eaf0;
+      border-radius:17px;
+      padding:21px;
+      box-shadow:0 4px 18px rgba(21,46,66,.04);
+    }
+
+    .metric-top{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      color:#718391;
+      font-size:13px;
+      font-weight:700;
+    }
+
+    .metric-icon{
+      width:37px;
+      height:37px;
+      border-radius:10px;
+      background:#e9f7ff;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+
+    .metric-number{
+      font-size:28px;
+      font-weight:900;
+      margin:15px 0 7px;
+    }
+
+    .up{
+      color:#16a766;
+      font-size:12px;
+      font-weight:700;
+    }
+
+    .dashboard-grid{
+      display:grid;
+      grid-template-columns:1.6fr 1fr;
+      gap:20px;
+      margin-bottom:22px;
+    }
+
+    .panel{
+      background:white;
+      border:1px solid #e2e9ef;
+      border-radius:17px;
+      padding:22px;
+      box-shadow:0 4px 18px rgba(21,46,66,.04);
+    }
+
+    .panel-title{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      margin-bottom:22px;
+    }
+
+    .panel-title h3{
+      font-size:16px;
+    }
+
+    .panel-title span{
+      color:#8093a1;
+      font-size:12px;
+    }
+
+    /* CHART */
+
+    .chart{
+      height:220px;
+      display:flex;
+      align-items:flex-end;
+      gap:16px;
+      border-bottom:1px solid #dce5eb;
+      padding:15px 10px 0;
+    }
+
+    .bar-wrap{
+      flex:1;
+      height:100%;
+      display:flex;
+      flex-direction:column;
+      justify-content:flex-end;
+      align-items:center;
+      gap:8px;
+    }
+
+    .bar{
+      width:70%;
+      max-width:42px;
+      background:linear-gradient(180deg,#25c3f5,#1589ec);
+      border-radius:7px 7px 2px 2px;
+      min-height:10px;
+    }
+
+    .bar-label{
+      color:#7a8c99;
+      font-size:11px;
+    }
+
+    /* FUNNEL */
+
+    .status-row{
+      margin-bottom:17px;
+    }
+
+    .status-info{
+      display:flex;
+      justify-content:space-between;
+      font-size:13px;
+      margin-bottom:7px;
+    }
+
+    .progress{
+      height:7px;
+      background:#edf2f5;
+      border-radius:20px;
+      overflow:hidden;
+    }
+
+    .progress div{
+      height:100%;
+      background:linear-gradient(90deg,var(--blue),var(--cyan));
+      border-radius:20px;
+    }
+
+    /* TABLE */
+
+    .table-panel{
+      background:white;
+      border:1px solid #e2e9ef;
+      border-radius:17px;
+      overflow:hidden;
+    }
+
+    .table-head{
+      padding:20px 22px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      border-bottom:1px solid #edf1f4;
+    }
+
+    table{
+      width:100%;
+      border-collapse:collapse;
+    }
+
+    th{
+      text-align:left;
+      padding:13px 20px;
+      font-size:11px;
+      color:#7c8e9c;
+      text-transform:uppercase;
+      letter-spacing:.5px;
+      background:#f9fbfc;
+    }
+
+    td{
+      padding:16px 20px;
+      border-top:1px solid #edf1f4;
+      font-size:13px;
+    }
+
+    .person{
+      display:flex;
+      align-items:center;
+      gap:10px;
+    }
+
+    .person-circle{
+      width:34px;
+      height:34px;
+      border-radius:50%;
+      background:#e8f5ff;
+      color:#178fdc;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-weight:900;
+    }
+
+    .badge{
+      display:inline-block;
+      padding:6px 10px;
+      border-radius:20px;
+      font-size:11px;
+      font-weight:800;
+    }
+
+    .badge-new{background:#e7f4ff;color:#178edb;}
+    .badge-contact{background:#fff3d7;color:#a87800;}
+    .badge-proposal{background:#eee9ff;color:#7557c9;}
+    .badge-win{background:#e4f9ed;color:#17935b;}
+
+    /* PIPELINE */
+
+    .pipeline{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:16px;
+      align-items:start;
+    }
+
+    .pipeline-column{
+      background:#eaf0f4;
+      border-radius:15px;
+      padding:13px;
+      min-height:500px;
+    }
+
+    .pipeline-title{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      margin-bottom:14px;
+      font-weight:800;
+      font-size:13px;
+    }
+
+    .count{
+      background:white;
+      border-radius:20px;
+      padding:4px 8px;
+      font-size:10px;
+    }
+
+    .deal-card{
+      background:white;
+      padding:15px;
+      border-radius:12px;
+      margin-bottom:10px;
+      border:1px solid #dde6ec;
+      cursor:pointer;
+      transition:.2s;
+    }
+
+    .deal-card:hover{
+      transform:translateY(-2px);
+      box-shadow:0 8px 20px rgba(0,0,0,.07);
+    }
+
+    .deal-card strong{
+      font-size:13px;
+    }
+
+    .deal-card p{
+      font-size:11px;
+      color:#718391;
+      margin:6px 0 12px;
+    }
+
+    .deal-bottom{
+      display:flex;
+      justify-content:space-between;
+      font-size:11px;
+      color:#6f8290;
+    }
+
+    .deal-value{
+      color:#159c62;
+      font-weight:800;
+    }
+
+    /* CLIENTS */
+
+    .client-grid{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:18px;
+    }
+
+    .client-card{
+      background:white;
+      border:1px solid #e1e9ef;
+      border-radius:16px;
+      padding:20px;
+    }
+
+    .client-header{
+      display:flex;
+      gap:12px;
+      align-items:center;
+      margin-bottom:17px;
+    }
+
+    .client-logo{
+      width:48px;
+      height:48px;
+      border-radius:13px;
+      background:#e9f7ff;
+      color:#148fde;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-weight:900;
+    }
+
+    .client-card p{
+      font-size:12px;
+      color:#728593;
+      margin:8px 0;
+    }
+
+    .client-actions{
+      display:flex;
+      gap:7px;
+      margin-top:16px;
+    }
+
+    .small-btn{
+      border:1px solid #d9e3ea;
+      background:white;
+      border-radius:8px;
+      padding:8px 10px;
+      cursor:pointer;
+      font-size:11px;
+      font-weight:700;
+    }
+
+    /* TASKS */
+
+    .task{
+      display:flex;
+      align-items:center;
+      gap:15px;
+      padding:17px;
+      background:white;
+      border:1px solid #e2e9ef;
+      border-radius:13px;
+      margin-bottom:10px;
+    }
+
+    .task-check{
+      width:21px;
+      height:21px;
+      border:2px solid #b9c8d2;
+      border-radius:6px;
+    }
+
+    .task-content{
+      flex:1;
+    }
+
+    .task-content strong{
+      display:block;
+      font-size:13px;
+      margin-bottom:4px;
+    }
+
+    .task-content span{
+      color:#7d8f9b;
+      font-size:11px;
+    }
+
+    .task-date{
+      font-size:11px;
+      font-weight:800;
+      color:#168edb;
+    }
+
+    /* MODAL */
+
+    .modal{
+      position:fixed;
+      inset:0;
+      background:rgba(2,15,25,.68);
+      z-index:100;
+      display:none;
+      align-items:center;
+      justify-content:center;
+      padding:20px;
+    }
+
+    .modal.show{
+      display:flex;
+    }
+
+    .modal-box{
+      background:white;
+      width:100%;
+      max-width:570px;
+      border-radius:20px;
+      padding:26px;
+      max-height:90vh;
+      overflow:auto;
+    }
+
+    .modal-header{
+      display:flex;
+      justify-content:space-between;
+      margin-bottom:23px;
+    }
+
+    .close{
+      border:0;
+      background:#edf2f5;
+      width:35px;
+      height:35px;
+      border-radius:9px;
+      cursor:pointer;
+    }
+
+    .form-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:15px;
+    }
+
+    .full{
+      grid-column:1/-1;
+    }
+
+    .save-btn{
+      width:100%;
+      border:0;
+      background:linear-gradient(90deg,#148fec,#24bdf2);
+      color:white;
+      border-radius:11px;
+      padding:14px;
+      font-weight:800;
+      cursor:pointer;
+    }
+
+    /* RESPONSIVE */
+
+    @media(max-width:1050px){
+      .metrics{grid-template-columns:repeat(2,1fr);}
+      .pipeline{grid-template-columns:repeat(2,1fr);}
+      .client-grid{grid-template-columns:repeat(2,1fr);}
+    }
+
+    @media(max-width:750px){
+      .sidebar{
+        width:75px;
+        padding:20px 10px;
+      }
+
+      .brand{
+        font-size:0;
+        padding:0 5px 25px;
+      }
+
+      .brand:after{
+        content:"ZX";
+        font-size:19px;
+        color:var(--cyan);
+      }
+
+      .menu-title,
+      .nav-item span:not(.nav-icon),
+      .sidebar-bottom{
+        display:none;
+      }
+
+      .nav-item{
+        justify-content:center;
+      }
+
+      .main{
+        margin-left:75px;
+      }
+
+      .content{
+        padding:20px 15px;
+      }
+
+      .topbar{
+        padding:0 15px;
+      }
+
+      .search{
+        width:170px;
+      }
+
+      .metrics,
+      .dashboard-grid,
+      .pipeline,
+      .client-grid{
+        grid-template-columns:1fr;
+      }
+
+      .form-grid{
+        grid-template-columns:1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- LOGIN DEMO -->
+<section id="loginScreen">
+  <div class="login-box">
+    <div class="login-logo">ZIEGEN<span>X</span></div>
+
+    <h2>Bienvenido al CRM</h2>
+    <p>Gestiona tus oportunidades, clientes, ventas y tareas desde un solo lugar.</p>
+
+    <div class="field">
+      <label>Email</label>
+      <input id="loginEmail" type="email" placeholder="tu@email.com">
+    </div>
+
+    <div class="field">
+      <label>Contraseña</label>
+      <input id="loginPassword" type="password" placeholder="••••••••">
+    </div>
+
+    <button class="login-button" onclick="enterCRM()">Entrar al CRM</button>
+
+    <div class="login-demo">
+      DEMO VISUAL · La autenticación segura se conectará en la siguiente etapa.
+    </div>
+  </div>
+</section>
+
+
+<!-- CRM -->
+<div id="app">
+
+  <aside class="sidebar">
+
+    <div class="brand">ZIEGEN<span>X</span></div>
+
+    <div class="menu-title">Principal</div>
+
+    <div class="nav-item active" data-page="dashboard">
+      <span class="nav-icon">⌂</span>
+      <span>Resumen</span>
+    </div>
+
+    <div class="nav-item" data-page="leads">
+      <span class="nav-icon">◎</span>
+      <span>Leads</span>
+    </div>
+
+    <div class="nav-item" data-page="pipeline">
+      <span class="nav-icon">▦</span>
+      <span>Negocios</span>
+    </div>
+
+    <div class="nav-item" data-page="clients">
+      <span class="nav-icon">♙</span>
+      <span>Clientes</span>
+    </div>
+
+    <div class="menu-title">Gestión</div>
+
+    <div class="nav-item" data-page="sales">
+      <span class="nav-icon">$</span>
+      <span>Ventas</span>
+    </div>
+
+    <div class="nav-item" data-page="tasks">
+      <span class="nav-icon">✓</span>
+      <span>Tareas</span>
+    </div>
+
+    <div class="nav-item" data-page="reports">
+      <span class="nav-icon">▥</span>
+      <span>Reportes</span>
+    </div>
+
+    <div class="nav-item" data-page="settings">
+      <span class="nav-icon">⚙</span>
+      <span>Ajustes</span>
+    </div>
+
+    <div class="sidebar-bottom">
+      <div class="user-mini">
+        <div class="avatar">M</div>
+        <div>
+          <strong>Miguel</strong>
+          <small>Administrador</small>
+        </div>
+      </div>
+    </div>
+
+  </aside>
+
+
+  <main class="main">
+
+    <header class="topbar">
+      <input class="search" placeholder="⌕  Buscar clientes, leads...">
+
+      <div class="top-actions">
+        <button class="notification">♢</button>
+        <button class="new-button" onclick="openLeadModal()">＋ Nuevo lead</button>
+      </div>
+    </header>
+
+
+    <div class="content">
+
+      <!-- DASHBOARD -->
+      <section id="dashboard" class="page active">
+
+        <div class="heading">
+          <div>
+            <h1>Buenos días 👋</h1>
+            <p>Aquí tienes el resumen de ZIEGENX.</p>
+          </div>
+        </div>
+
+        <div class="metrics">
+
+          <div class="metric">
+            <div class="metric-top">
+              Leads
+              <div class="metric-icon">◎</div>
+            </div>
+            <div class="metric-number" id="leadCount">28</div>
+            <div class="up">↑ 8 este mes</div>
+          </div>
+
+          <div class="metric">
+            <div class="metric-top">
+              Clientes
+              <div class="metric-icon">♙</div>
+            </div>
+            <div class="metric-number">14</div>
+            <div class="up">↑ 3 este mes</div>
+          </div>
+
+          <div class="metric">
+            <div class="metric-top">
+              Ventas
+              <div class="metric-icon">$</div>
+            </div>
+            <div class="metric-number">€4.250</div>
+            <div class="up">↑ 18% este mes</div>
+          </div>
+
+          <div class="metric">
+            <div class="metric-top">
+              Conversión
+              <div class="metric-icon">%</div>
+            </div>
+            <div class="metric-number">32%</div>
+            <div class="up">↑ 4,2%</div>
+          </div>
+
+        </div>
+
+
+        <div class="dashboard-grid">
+
+          <div class="panel">
+            <div class="panel-title">
+              <h3>Ingresos</h3>
+              <span>Últimos 8 meses</span>
+            </div>
+
+            <div class="chart">
+              <div class="bar-wrap"><div class="bar" style="height:35%"></div><div class="bar-label">Mar</div></div>
+              <div class="bar-wrap"><div class="bar" style="height:52%"></div><div class="bar-label">Abr</div></div>
+              <div class="bar-wrap"><div class="bar" style="height:45%"></div><div class="bar-label">May</div></div>
+              <div class="bar-wrap"><div class="bar" style="height:67%"></div><div class="bar-label">Jun</div></div>
+              <div class="bar-wrap"><div class="bar" style="height:59%"></div><div class="bar-label">Jul</div></div>
+              <div class="bar-wrap"><div class="bar" style="height:81%"></div><div class="bar-label">Ago</div></div>
+              <div class="bar-wrap"><div class="bar" style="height:70%"></div><div class="bar-label">Sep</div></div>
+              <div class="bar-wrap"><div class="bar" style="height:94%"></div><div class="bar-label">Oct</div></div>
+            </div>
+          </div>
+
+
+          <div class="panel">
+            <div class="panel-title">
+              <h3>Estado de oportunidades</h3>
+              <span>Este mes</span>
+            </div>
+
+            <div class="status-row">
+              <div class="status-info"><span>Nuevos</span><strong>8</strong></div>
+              <div class="progress"><div style="width:80%"></div></div>
+            </div>
+
+            <div class="status-row">
+              <div class="status-info"><span>Contactados</span><strong>6</strong></div>
+              <div class="progress"><div style="width:60%"></div></div>
+            </div>
+
+            <div class="status-row">
+              <div class="status-info"><span>Propuestas</span><strong>5</strong></div>
+              <div class="progress"><div style="width:50%"></div></div>
+            </div>
+
+            <div class="status-row">
+              <div class="status-info"><span>Ganados</span><strong>4</strong></div>
+              <div class="progress"><div style="width:40%"></div></div>
+            </div>
+
+            <div style="margin-top:28px;padding:15px;background:#eef9ff;border-radius:12px;">
+              <small style="color:#688291">Valor del pipeline</small>
+              <div style="font-size:24px;font-weight:900;margin-top:5px;">€6.420</div>
+            </div>
+          </div>
+
+        </div>
+
+
+        <div class="table-panel">
+
+          <div class="table-head">
+            <strong>Últimos leads</strong>
+            <span style="font-size:12px;color:#168edb;cursor:pointer" onclick="showPage('leads')">
+              Ver todos →
+            </span>
+          </div>
+
+          <table>
+            <thead>
+              <tr>
+                <th>Contacto</th>
+                <th>Servicio</th>
+                <th>País</th>
+                <th>Estado</th>
+                <th>Fecha</th>
+              </tr>
+            </thead>
+
+            <tbody id="recentLeads">
+              <tr>
+                <td><div class="person"><div class="person-circle">L</div><strong>Laura Gómez</strong></div></td>
+                <td>Web + CRM</td>
+                <td>🇪🇸 España</td>
+                <td><span class="badge badge-new">Nuevo</span></td>
+                <td>Hace 12 min</td>
+              </tr>
+
+              <tr>
+                <td><div class="person"><div class="person-circle">J</div><strong>Juan Pérez</strong></div></td>
+                <td>Web profesional</td>
+                <td>🇨🇱 Chile</td>
+                <td><span class="badge badge-contact">Contactado</span></td>
+                <td>Hace 1 h</td>
+              </tr>
+
+              <tr>
+                <td><div class="person"><div class="person-circle">C</div><strong>Clínica Sur</strong></div></td>
+                <td>Web + CRM</td>
+                <td>🇪🇸 España</td>
+                <td><span class="badge badge-proposal">Propuesta</span></td>
+                <td>Ayer</td>
+              </tr>
+
+              <tr>
+                <td><div class="person"><div class="person-circle">M</div><strong>Martín López</strong></div></td>
+                <td>CRM</td>
+                <td>🇨🇱 Chile</td>
+                <td><span class="badge badge-win">Ganado</span></td>
+                <td>8 Oct</td>
+              </tr>
+            </tbody>
+          </table>
+
+        </div>
+
+      </section>
+
+
+      <!-- LEADS -->
+      <section id="leads" class="page">
+
+        <div class="heading">
+          <div>
+            <h1>Leads</h1>
+            <p>Personas y empresas interesadas en tus servicios.</p>
+          </div>
+
+          <button class="new-button" onclick="openLeadModal()">＋ Nuevo lead</button>
+        </div>
+
+        <div class="table-panel">
+          <div class="table-head">
+            <strong>Todos los leads</strong>
+            <input style="padding:9px;border:1px solid #dce5eb;border-radius:8px" placeholder="Buscar lead...">
+          </div>
+
+          <table>
+            <thead>
+              <tr>
+                <th>Contacto</th>
+                <th>Empresa</th>
+                <th>Servicio</th>
+                <th>País</th>
+                <th>Estado</th>
+                <th>Valor</th>
+              </tr>
+            </thead>
+
+            <tbody id="allLeads">
+              <tr>
+                <td>Laura Gómez</td>
+                <td>LG Beauty</td>
+                <td>Web + CRM</td>
+                <td>🇪🇸 España</td>
+                <td><span class="badge badge-new">Nuevo</span></td>
+                <td>249 €</td>
+              </tr>
+              <tr>
+                <td>Juan Pérez</td>
+                <td>JP Servicios</td>
+                <td>Web profesional</td>
+                <td>🇨🇱 Chile</td>
+                <td><span class="badge badge-contact">Contactado</span></td>
+                <td>$199.000</td>
+              </tr>
+              <tr>
+                <td>Clínica Sur</td>
+                <td>Clínica Sur</td>
+                <td>Web + CRM</td>
+                <td>🇪🇸 España</td>
+                <td><span class="badge badge-proposal">Propuesta</span></td>
+                <td>249 €</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+      </section>
+
+
+      <!-- PIPELINE -->
+      <section id="pipeline" class="page">
+
+        <div class="heading">
+          <div>
+            <h1>Negocios</h1>
+            <p>Gestiona visualmente todas tus oportunidades.</p>
+          </div>
+        </div>
+
+        <div class="pipeline">
+
+          <div class="pipeline-column">
+            <div class="pipeline-title">NUEVO <span class="count">3</span></div>
+
+            <div class="deal-card">
+              <strong>Laura Gómez</strong>
+              <p>LG Beauty · Web + CRM</p>
+              <div class="deal-bottom"><span>🇪🇸</span><span class="deal-value">249 €</span></div>
+            </div>
+
+            <div class="deal-card">
+              <strong>Pedro Martínez</strong>
+              <p>Restaurante PM · Web</p>
+              <div class="deal-bottom"><span>🇪🇸</span><span class="deal-value">199 €</span></div>
+            </div>
+          </div>
+
+
+          <div class="pipeline-column">
+            <div class="pipeline-title">CONTACTADO <span class="count">2</span></div>
+
+            <div class="deal-card">
+              <strong>Juan Pérez</strong>
+              <p>JP Servicios · Web + CRM</p>
+              <div class="deal-bottom"><span>🇨🇱</span><span class="deal-value">$199.000</span></div>
+            </div>
+          </div>
+
+
+          <div class="pipeline-column">
+            <div class="pipeline-title">PROPUESTA <span class="count">2</span></div>
+
+            <div class="deal-card">
+              <strong>Clínica Sur</strong>
+              <p>CRM + Web corporativa</p>
+              <div class="deal-bottom"><span>🇪🇸</span><span class="deal-value">349 €</span></div>
+            </div>
+          </div>
+
+
+          <div class="pipeline-column">
+            <div class="pipeline-title">GANADO 🎉 <span class="count">2</span></div>
+
+            <div class="deal-card">
+              <strong>Martín López</strong>
+              <p>ML Asesoría · CRM</p>
+              <div class="deal-bottom"><span>🇨🇱</span><span class="deal-value">$250.000</span></div>
+            </div>
+
+            <div class="deal-card">
+              <strong>Studio 24</strong>
+              <p>Web + CRM</p>
+              <div class="deal-bottom"><span>🇪🇸</span><span class="deal-value">249 €</span></div>
+            </div>
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- CLIENTS -->
+      <section id="clients" class="page">
+
+        <div class="heading">
+          <div>
+            <h1>Cartera de clientes</h1>
+            <p>Todos tus clientes y su historial comercial.</p>
+          </div>
+        </div>
+
+        <div class="client-grid">
+
+          <div class="client-card">
+            <div class="client-header">
+              <div class="client-logo">ML</div>
+              <div><strong>ML Asesoría</strong><p>Martín López</p></div>
+            </div>
+            <p>🌐 mlasesoria.com</p>
+            <p>✉ martin@mlasesoria.com</p>
+            <p>📦 Web + CRM Profesional</p>
+            <p>💰 $250.000 CLP</p>
+            <div class="client-actions">
+              <button class="small-btn">Ver ficha</button>
+              <button class="small-btn">WhatsApp</button>
+            </div>
+          </div>
+
+          <div class="client-card">
+            <div class="client-header">
+              <div class="client-logo">S24</div>
+              <div><strong>Studio 24</strong><p>Carolina Ruiz</p></div>
+            </div>
+            <p>🌐 studio24.es</p>
+            <p>✉ hola@studio24.es</p>
+            <p>📦 Web + CRM Profesional</p>
+            <p>💰 249 €</p>
+            <div class="client-actions">
+              <button class="small-btn">Ver ficha</button>
+              <button class="small-btn">WhatsApp</button>
+            </div>
+          </div>
+
+          <div class="client-card">
+            <div class="client-header">
+              <div class="client-logo">AC</div>
+              <div><strong>AC Consulting</strong><p>Ana Costa</p></div>
+            </div>
+            <p>🌐 acconsulting.es</p>
+            <p>✉ ana@acconsulting.es</p>
+            <p>📦 CRM Profesional</p>
+            <p>💰 199 €</p>
+            <div class="client-actions">
+              <button class="small-btn">Ver ficha</button>
+              <button class="small-btn">WhatsApp</button>
+            </div>
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- SALES -->
+      <section id="sales" class="page">
+
+        <div class="heading">
+          <div>
+            <h1>Ventas e ingresos</h1>
+            <p>Control comercial y financiero de tus ventas.</p>
+          </div>
+        </div>
+
+        <div class="metrics">
+          <div class="metric"><div class="metric-top">Este mes</div><div class="metric-number">€1.245</div><div class="up">↑ 18%</div></div>
+          <div class="metric"><div class="metric-top">Año</div><div class="metric-number">€9.840</div><div class="up">Objetivo 62%</div></div>
+          <div class="metric"><div class="metric-top">Ticket medio</div><div class="metric-number">€249</div><div class="up">↑ €18</div></div>
+          <div class="metric"><div class="metric-top">Ventas cerradas</div><div class="metric-number">5</div><div class="up">Este mes</div></div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-title"><h3>Evolución de ingresos</h3><span>2026</span></div>
+          <div class="chart">
+            <div class="bar-wrap"><div class="bar" style="height:30%"></div><div class="bar-label">Ene</div></div>
+            <div class="bar-wrap"><div class="bar" style="height:42%"></div><div class="bar-label">Feb</div></div>
+            <div class="bar-wrap"><div class="bar" style="height:38%"></div><div class="bar-label">Mar</div></div>
+            <div class="bar-wrap"><div class="bar" style="height:55%"></div><div class="bar-label">Abr</div></div>
+            <div class="bar-wrap"><div class="bar" style="height:48%"></div><div class="bar-label">May</div></div>
+            <div class="bar-wrap"><div class="bar" style="height:67%"></div><div class="bar-label">Jun</div></div>
+            <div class="bar-wrap"><div class="bar" style="height:76%"></div><div class="bar-label">Jul</div></div>
+            <div class="bar-wrap"><div class="bar" style="height:63%"></div><div class="bar-label">Ago</div></div>
+            <div class="bar-wrap"><div class="bar" style="height:82%"></div><div class="bar-label">Sep</div></div>
+            <div class="bar-wrap"><div class="bar" style="height:96%"></div><div class="bar-label">Oct</div></div>
+          </div>
+        </div>
+
+      </section>
+
+
+      <!-- TASKS -->
+      <section id="tasks" class="page">
+
+        <div class="heading">
+          <div>
+            <h1>Agenda y tareas</h1>
+            <p>Todo lo que necesitas hacer, en un solo lugar.</p>
+          </div>
+          <button class="new-button">＋ Nueva tarea</button>
+        </div>
+
+        <div class="task">
+          <div class="task-check"></div>
+          <div class="task-content"><strong>Llamar a Laura Gómez</strong><span>Seguimiento Web + CRM · LG Beauty</span></div>
+          <div class="task-date">HOY · 17:00</div>
+        </div>
+
+        <div class="task">
+          <div class="task-check"></div>
+          <div class="task-content"><strong>Enviar propuesta a Clínica Sur</strong><span>Preparar presupuesto final</span></div>
+          <div class="task-date">HOY · 18:30</div>
+        </div>
+
+        <div class="task">
+          <div class="task-check"></div>
+          <div class="task-content"><strong>Seguimiento Juan Pérez</strong><span>Contactar por WhatsApp</span></div>
+          <div class="task-date">MAÑANA</div>
+        </div>
+
+        <div class="task">
+          <div class="task-check"></div>
+          <div class="task-content"><strong>Renovación dominio Studio 24</strong><span>Revisar renovación anual</span></div>
+          <div class="task-date">18 OCT</div>
+        </div>
+
+      </section>
+
+
+      <!-- REPORTS -->
+      <section id="reports" class="page">
+        <div class="heading">
+          <div>
+            <h1>Reportes</h1>
+            <p>Indicadores para entender cómo está creciendo tu negocio.</p>
+          </div>
+        </div>
+
+        <div class="metrics">
+          <div class="metric"><div class="metric-top">Leads generados</div><div class="metric-number">84</div><div class="up">2026</div></div>
+          <div class="metric"><div class="metric-top">Conversión</div><div class="metric-number">32%</div><div class="up">↑ 4,2%</div></div>
+          <div class="metric"><div class="metric-top">Clientes activos</div><div class="metric-number">14</div><div class="up">↑ 3</div></div>
+          <div class="metric"><div class="metric-top">Ingresos</div><div class="metric-number">€9.840</div><div class="up">2026</div></div>
+        </div>
+      </section>
+
+
+      <!-- SETTINGS -->
+      <section id="settings" class="page">
+        <div class="heading">
+          <div>
+            <h1>Ajustes</h1>
+            <p>Configuración general del CRM.</p>
+          </div>
+        </div>
+
+        <div class="panel" style="max-width:700px">
+          <div class="field">
+            <label>Nombre de empresa</label>
+            <input value="ZIEGENX">
+          </div>
+
+          <div class="field">
+            <label>Email</label>
+            <input value="administracion@ziegenx.com">
+          </div>
+
+          <div class="field">
+            <label>Moneda principal</label>
+            <select>
+              <option>EUR (€)</option>
+              <option>CLP ($)</option>
+            </select>
+          </div>
+
+          <button class="new-button">Guardar cambios</button>
+        </div>
+      </section>
+
+    </div>
+  </main>
+</div>
+
+
+<!-- NEW LEAD MODAL -->
+<div id="leadModal" class="modal">
+  <div class="modal-box">
+
+    <div class="modal-header">
+      <div>
+        <h2>Nuevo lead</h2>
+        <p style="color:#778a97;font-size:13px;margin-top:5px">Registra una nueva oportunidad comercial.</p>
+      </div>
+      <button class="close" onclick="closeLeadModal()">✕</button>
+    </div>
+
+    <div class="form-grid">
+
+      <div class="field">
+        <label>Nombre</label>
+        <input id="leadName" placeholder="Nombre">
+      </div>
+
+      <div class="field">
+        <label>Empresa</label>
+        <input id="leadCompany" placeholder="Empresa">
+      </div>
+
+      <div class="field">
+        <label>Email</label>
+        <input id="leadEmail" placeholder="email@empresa.com">
+      </div>
+
+      <div class="field">
+        <label>WhatsApp</label>
+        <input id="leadPhone" placeholder="+34...">
+      </div>
+
+      <div class="field">
+        <label>País</label>
+        <select id="leadCountry">
+          <option value="España">🇪🇸 España</option>
+          <option value="Chile">🇨🇱 Chile</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label>Servicio</label>
+        <select id="leadService">
+          <option>Web + CRM Profesional</option>
+          <option>Página Web Profesional</option>
+          <option>CRM Profesional</option>
+          <option>Otro</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label>Valor estimado</label>
+        <input id="leadValue" placeholder="249 €">
+      </div>
+
+      <div class="field">
+        <label>Estado</label>
+        <select>
+          <option>Nuevo</option>
+          <option>Contactado</option>
+          <option>Propuesta</option>
+          <option>Ganado</option>
+        </select>
+      </div>
+
+      <div class="field full">
+        <label>Notas</label>
+        <textarea rows="4" placeholder="Información relevante del cliente..."></textarea>
+      </div>
+
+      <div class="full">
+        <button class="save-btn" onclick="saveDemoLead()">Guardar lead</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+<script>
+
+  function enterCRM(){
+    document.getElementById("loginScreen").style.display="none";
+    document.getElementById("app").style.display="block";
+  }
+
+  document.querySelectorAll(".nav-item").forEach(item=>{
+    item.addEventListener("click",()=>{
+      const page=item.dataset.page;
+      showPage(page);
+
+      document.querySelectorAll(".nav-item").forEach(i=>i.classList.remove("active"));
+      item.classList.add("active");
+    });
+  });
+
+  function showPage(page){
+    document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
+    document.getElementById(page).classList.add("active");
+
+    document.querySelectorAll(".nav-item").forEach(i=>{
+      i.classList.toggle("active",i.dataset.page===page);
+    });
+  }
+
+  function openLeadModal(){
+    document.getElementById("leadModal").classList.add("show");
+  }
+
+  function closeLeadModal(){
+    document.getElementById("leadModal").classList.remove("show");
+  }
+
+  document.getElementById("leadModal").addEventListener("click",(e)=>{
+    if(e.target.id==="leadModal") closeLeadModal();
+  });
+
+  function saveDemoLead(){
+
+    const name=document.getElementById("leadName").value.trim();
+    const company=document.getElementById("leadCompany").value.trim();
+    const country=document.getElementById("leadCountry").value;
+    const service=document.getElementById("leadService").value;
+    const value=document.getElementById("leadValue").value || "—";
+
+    if(!name){
+      alert("Ingresa el nombre del lead.");
+      return;
+    }
+
+    const flag=country==="Chile" ? "🇨🇱" : "🇪🇸";
+
+    const row=document.createElement("tr");
+
+    row.innerHTML=`
+      <td>${escapeHTML(name)}</td>
+      <td>${escapeHTML(company || "—")}</td>
+      <td>${escapeHTML(service)}</td>
+      <td>${flag} ${escapeHTML(country)}</td>
+      <td><span class="badge badge-new">Nuevo</span></td>
+      <td>${escapeHTML(value)}</td>
+    `;
+
+    document.getElementById("allLeads").prepend(row);
+
+    const current=parseInt(document.getElementById("leadCount").textContent);
+    document.getElementById("leadCount").textContent=current+1;
+
+    closeLeadModal();
+    showPage("leads");
+
+    document.querySelectorAll(".nav-item").forEach(i=>{
+      i.classList.toggle("active",i.dataset.page==="leads");
+    });
+
+    document.getElementById("leadName").value="";
+    document.getElementById("leadCompany").value="";
+    document.getElementById("leadEmail").value="";
+    document.getElementById("leadPhone").value="";
+    document.getElementById("leadValue").value="";
+  }
+
+  function escapeHTML(str){
+    return String(str)
+      .replaceAll("&","&amp;")
+      .replaceAll("<","&lt;")
+      .replaceAll(">","&gt;")
+      .replaceAll('"',"&quot;")
+      .replaceAll("'","&#039;");
+  }
+
+</script>
+
+</body>
+</html>
