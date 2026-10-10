@@ -1697,5 +1697,241 @@ function renderPipeline(){const el=document.querySelector('#pipeline .pipeline')
 // Ocultar Ajustes mientras no tenga funciones reales
 try{document.querySelector('[data-page="settings"]')?.style.setProperty('display','none')}catch(e){}
 </script>
+
+<style>
+/* ===== ZIEGENX CRM V2 TOP LINEA ===== */
+:root{--zx-navy:#071b2a;--zx-navy2:#0b2638;--zx-blue:#16a9e8;--zx-blue2:#087fc0;--zx-bg:#f4f7fa;--zx-line:#dce5ec;--zx-text:#102638;--zx-muted:#6f8190;--zx-green:#18a66a;--zx-amber:#e7a62b;--zx-red:#df5d64}
+.nav-icon,.metric-icon{font-size:0!important;display:grid!important;place-items:center}
+.nav-icon svg,.metric-icon svg{width:19px;height:19px;stroke:currentColor}
+.notification{font-size:0!important;position:relative}
+.notification svg{width:19px;height:19px}
+.notification .zx-bell-count{font-size:10px;position:absolute;right:-5px;top:-6px;min-width:18px;height:18px;border-radius:20px;background:#ef5c63;color:#fff;display:grid;place-items:center;font-weight:800;border:2px solid #fff}
+#clients .client-grid{display:block!important}
+.zx-client-toolbar{display:flex;gap:10px;align-items:center;justify-content:space-between;margin:16px 0 14px;flex-wrap:wrap}
+.zx-client-filters{display:flex;gap:8px;flex-wrap:wrap}
+.zx-chip{border:1px solid var(--zx-line);background:#fff;border-radius:10px;padding:9px 12px;color:#405767;font-weight:700;font-size:13px}
+.zx-client-list{background:#fff;border:1px solid var(--zx-line);border-radius:18px;overflow:hidden}
+.zx-client-row{display:grid;grid-template-columns:minmax(260px,1.4fr) minmax(190px,1fr) 150px 140px 180px;align-items:center;gap:18px;padding:17px 20px;border-bottom:1px solid #edf2f5;cursor:pointer;transition:.18s}
+.zx-client-row:last-child{border-bottom:0}.zx-client-row:hover{background:#f8fbfd}
+.zx-client-main{display:flex;gap:12px;align-items:center;min-width:0}
+.zx-avatar-modern{width:42px;height:42px;border-radius:12px;background:linear-gradient(145deg,#0c8dcb,#28bff2);color:#fff;display:grid;place-items:center;font-weight:850;letter-spacing:.4px;flex:0 0 auto}
+.zx-client-main strong{display:block;color:var(--zx-text);font-size:14px}.zx-client-main small,.zx-cell small{display:block;color:var(--zx-muted);margin-top:3px;font-size:12px}
+.zx-cell{min-width:0;color:#294151;font-size:13px}.zx-cell strong{display:block}
+.zx-status-pill{display:inline-flex;align-items:center;gap:6px;padding:6px 9px;border-radius:999px;background:#e9f8f1;color:#12815a;font-size:11px;font-weight:800}
+.zx-dot{width:7px;height:7px;border-radius:50%;background:currentColor}
+.zx-row-actions{display:flex;justify-content:flex-end;gap:7px}
+.zx-icon-btn{width:36px;height:36px;border:1px solid var(--zx-line);background:#fff;border-radius:10px;display:grid;place-items:center;color:#466071;cursor:pointer;text-decoration:none}
+.zx-icon-btn:hover{border-color:#8ccfea;color:#058fce;background:#f1fbff}.zx-icon-btn svg{width:17px;height:17px;stroke:currentColor}
+.zx-empty-modern{padding:50px;text-align:center;color:var(--zx-muted)}
+#drawer360{position:fixed!important;inset:0!important;width:auto!important;max-width:none!important;transform:translateY(16px)!important;opacity:0;pointer-events:none;background:rgba(5,18,29,.36)!important;backdrop-filter:blur(4px);z-index:5000!important;padding:26px!important;overflow:auto!important;transition:.2s!important}
+#drawer360.open{transform:none!important;opacity:1;pointer-events:auto}
+#drawer360 #drawerBody{max-width:1480px;margin:0 auto;background:#f5f8fb;border-radius:22px;min-height:calc(100vh - 52px);box-shadow:0 24px 80px rgba(4,20,31,.28);overflow:hidden}
+.zx360-head{background:linear-gradient(115deg,#071c2b,#0b3045);padding:22px 28px;color:#fff}
+.zx360-top{display:flex;align-items:center;gap:15px}.zx360-title{min-width:0;flex:1}.zx360-title small{color:#78d7fa;font-weight:800;letter-spacing:.08em;text-transform:uppercase}.zx360-title h2{font-size:25px;margin:4px 0 2px}.zx360-title p{margin:0;color:#b8c8d2}
+.zx-avatar{width:54px;height:54px;border-radius:15px;background:#16afe9;color:#fff;display:grid;place-items:center}
+.zx-avatar svg{width:25px;height:25px}
+.zx-close{width:42px;height:42px;border-radius:12px;border:1px solid rgba(255,255,255,.15);background:rgba(255,255,255,.07);color:#fff;display:grid;place-items:center;cursor:pointer}.zx-close svg{width:20px;height:20px}
+.zx360-body{padding:0 26px 28px!important}
+.zx-record-top{display:grid;grid-template-columns:1fr auto;gap:18px;align-items:center;padding:18px 0 12px}
+.zx-stagebar{display:flex;min-width:0;overflow:auto;padding-bottom:2px}
+.zx-stagebtn{position:relative;border:0;background:#e4eaf0;color:#536775;padding:10px 24px 10px 30px;font-weight:800;font-size:12px;min-width:128px;clip-path:polygon(0 0,calc(100% - 14px) 0,100% 50%,calc(100% - 14px) 100%,0 100%,14px 50%);margin-left:-10px;cursor:pointer}
+.zx-stagebtn:first-child{margin-left:0;clip-path:polygon(0 0,calc(100% - 14px) 0,100% 50%,calc(100% - 14px) 100%,0 100%)}
+.zx-stagebtn.active{background:#0f9ed6;color:#fff}.zx-stagebtn.won{background:#e8f5ef;color:#158158}.zx-stagebtn.lost{background:#faecee;color:#b84b52}
+.zx-top-actions{display:flex;gap:8px}.zx-action-primary,.zx-action-secondary{height:40px;border-radius:11px;padding:0 14px;font-weight:800;display:inline-flex;align-items:center;gap:8px;cursor:pointer;text-decoration:none;font-size:13px}
+.zx-action-primary{border:0;background:#079fe0;color:#fff}.zx-action-secondary{border:1px solid var(--zx-line);background:#fff;color:#294555}.zx-action-primary svg,.zx-action-secondary svg{width:17px;height:17px}
+.zx-tabs{display:flex!important;gap:2px!important;border-bottom:1px solid var(--zx-line)!important;background:transparent!important;margin:0!important;overflow:auto}
+.zx-tab{border:0!important;background:transparent!important;border-radius:0!important;padding:13px 15px!important;color:#667b89!important;font-weight:800!important;white-space:nowrap}.zx-tab.active{color:#078fc9!important;border-bottom:3px solid #08a5e4!important}
+.zx-pane{padding-top:18px}
+.zx-360-layout{display:grid;grid-template-columns:310px minmax(0,1fr) 310px;gap:16px;align-items:start}
+.zx-card{border:1px solid var(--zx-line)!important;border-radius:15px!important;box-shadow:none!important;background:#fff!important}
+.zx-profile-card{text-align:left}.zx-profile-hero{display:flex;gap:12px;align-items:center;padding-bottom:16px;border-bottom:1px solid #edf2f5}.zx-profile-hero .zx-avatar-modern{width:50px;height:50px;border-radius:14px}
+.zx-profile-line{display:flex;gap:10px;padding:11px 0;border-bottom:1px solid #eff3f6}.zx-profile-line:last-child{border-bottom:0}.zx-profile-line svg{width:17px;height:17px;stroke:#0a9edb;flex:0 0 auto;margin-top:2px}.zx-profile-line b{font-size:12px;display:block;color:#6c7f8d;margin-bottom:2px}.zx-profile-line span{font-size:13px;color:#203949;word-break:break-word}
+.zx-insight-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:14px}.zx-insight{background:#fff;border:1px solid var(--zx-line);border-radius:14px;padding:14px}.zx-insight small{display:block;color:#708492;font-size:11px;font-weight:800}.zx-insight b{display:block;font-size:22px;color:#102b3c;margin-top:5px}.zx-insight em{font-style:normal;font-size:11px;color:#7d8d98}
+.zx-timeline{position:relative;padding-left:20px}.zx-timeline:before{content:"";position:absolute;left:6px;top:8px;bottom:8px;width:2px;background:#e3ebf0}.zx-event{position:relative;padding:0 0 18px 14px!important;border:0!important}.zx-event:before{content:"";position:absolute;left:-18px;top:5px;width:10px;height:10px;border-radius:50%;background:#0da5e1;border:3px solid #dff4fc}.zx-event b{display:block;font-size:13px;color:#203a4a}.zx-event span{font-size:11px;color:#81919c}
+.zx-next-card h3,.zx-card h3{margin-top:0}.zx-next-item{display:flex;gap:10px;padding:11px 0;border-bottom:1px solid #edf2f5}.zx-next-item svg{width:18px;height:18px;stroke:#079edb}.zx-next-item strong{display:block;font-size:13px}.zx-next-item small{color:#7a8d99}
+.zx-quick-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-top:12px}.zx-quick-grid button{border:1px solid var(--zx-line);background:#fff;border-radius:11px;padding:10px 8px;font-weight:800;color:#355064;display:flex;gap:7px;align-items:center;justify-content:center;cursor:pointer}.zx-quick-grid svg{width:16px;height:16px;stroke:#079edb}
+.zx-pipeline-v2{gap:12px!important;overflow-x:auto;padding-bottom:12px}.zx-pipeline-v2 .stage{background:#f7f9fb!important;border:1px solid var(--zx-line)!important;border-radius:15px!important;min-height:420px;padding:11px!important}.zx-pipeline-v2 .stage-title{padding:3px 4px 12px!important}.zx-pipeline-v2 .stage-title span{font-size:12px;font-weight:850;text-transform:uppercase;letter-spacing:.05em}.zx-pipeline-v2 .deal{background:#fff!important;border:1px solid #e1e8ed!important;border-radius:13px!important;box-shadow:0 4px 12px rgba(13,38,54,.04)!important;padding:13px!important;margin-bottom:9px!important}.zx-pipeline-v2 .deal:hover{border-color:#8ed2ec!important;transform:translateY(-1px)}
+.zx-deal-meta{display:flex;justify-content:space-between;gap:8px;margin-top:10px;color:#758793;font-size:11px}.zx-priority{font-weight:850}.zx-priority.Alta{color:#d85a61}.zx-priority.Media{color:#c18a19}.zx-priority.Baja{color:#238761}
+.zx-modal-shell{position:fixed;inset:0;background:rgba(4,18,28,.45);z-index:7000;display:none;align-items:center;justify-content:center;padding:20px}.zx-modal-shell.show{display:flex}.zx-modal-card{width:min(520px,100%);background:#fff;border-radius:18px;padding:22px;box-shadow:0 30px 90px rgba(0,0,0,.25)}.zx-modal-card h3{margin:0 0 5px}.zx-modal-card p{margin:0 0 18px;color:#71828d}.zx-reasons{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}.zx-reason{border:1px solid var(--zx-line);background:#fff;border-radius:11px;padding:11px;text-align:left;font-weight:750;cursor:pointer}.zx-reason.active{border-color:#0ca4df;background:#edf9fe;color:#087faf}.zx-modal-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:18px}
+@media(max-width:1100px){.zx-360-layout{grid-template-columns:270px minmax(0,1fr)}.zx-360-layout>.zx-right{grid-column:1/-1}.zx-client-row{grid-template-columns:minmax(230px,1.5fr) 1fr 120px 150px}.zx-client-row>.zx-cell:nth-child(4){display:none}.zx-insight-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:760px){#drawer360{padding:0!important}#drawer360 #drawerBody{border-radius:0;min-height:100vh}.zx360-body{padding:0 14px 20px!important}.zx360-head{padding:17px}.zx-record-top{grid-template-columns:1fr}.zx-top-actions{overflow:auto}.zx-360-layout{grid-template-columns:1fr}.zx-client-row{grid-template-columns:1fr auto;padding:14px}.zx-client-row>.zx-cell{display:none}.zx-insight-grid{grid-template-columns:1fr 1fr}.zx-stagebtn{min-width:118px;padding-left:24px}.zx-reasons{grid-template-columns:1fr}}
+</style>
+
+<div id="zxLostModal" class="zx-modal-shell" aria-hidden="true">
+  <div class="zx-modal-card">
+    <h3>Cerrar oportunidad</h3>
+    <p>Selecciona el motivo. Quedará registrado en el historial comercial.</p>
+    <div class="zx-reasons" id="zxLostReasons"></div>
+    <div class="zx-field" style="margin-top:12px"><label>Comentario opcional</label><textarea id="zxLostComment" placeholder="Añade contexto para futuras oportunidades"></textarea></div>
+    <div class="zx-modal-actions"><button class="zx-action-secondary" id="zxLostCancel">Cancelar</button><button class="zx-action-primary" id="zxLostSave">Marcar perdida</button></div>
+  </div>
+</div>
+
+<script>
+/* Modern SVG icon system — no emoji/GIF UI */
+const zxIcons={
+ home:'<path d="M3 11.5 12 4l9 7.5"/><path d="M5.5 10.5V20h13v-9.5"/><path d="M9.5 20v-6h5v6"/>',
+ target:'<circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3"/><path d="M12 2v2M22 12h-2M12 22v-2M2 12h2"/>',
+ columns:'<rect x="3" y="4" width="5" height="16" rx="1"/><rect x="10" y="4" width="5" height="16" rx="1"/><rect x="17" y="4" width="4" height="16" rx="1"/>',
+ users:'<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/>',
+ wallet:'<path d="M4 7h15a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H5a3 3 0 0 1-3-3V6a3 3 0 0 1 3-3h12"/><path d="M16 13h5"/><circle cx="16" cy="13" r=".5"/>',
+ check:'<path d="m4 12 5 5L20 6"/>', chart:'<path d="M4 19V9M10 19V5M16 19v-7M22 19V2"/><path d="M2 21h22"/>',
+ briefcase:'<rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V4h8v3M3 12h18M10 12v2h4v-2"/>',
+ settings:'<circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .34 1.88l.06.06-2.83 2.83-.06-.06A1.7 1.7 0 0 0 15 19.4a1.7 1.7 0 0 0-1 .6 1.7 1.7 0 0 0-.4 1.1V21h-4v-.1A1.7 1.7 0 0 0 8.6 19.4a1.7 1.7 0 0 0-1.88.34l-.06.06-2.83-2.83.06-.06A1.7 1.7 0 0 0 4.6 15a1.7 1.7 0 0 0-.6-1 1.7 1.7 0 0 0-1.1-.4H3v-4h.1A1.7 1.7 0 0 0 4.6 8.6a1.7 1.7 0 0 0-.34-1.88l-.06-.06 2.83-2.83.06.06A1.7 1.7 0 0 0 9 4.6a1.7 1.7 0 0 0 1-.6 1.7 1.7 0 0 0 .4-1.1V3h4v.1A1.7 1.7 0 0 0 15.4 4.6a1.7 1.7 0 0 0 1.88-.34l.06-.06 2.83 2.83-.06.06A1.7 1.7 0 0 0 19.4 9c.14.36.35.7.6 1 .3.32.7.5 1.1.5h.1v4h-.1c-.4 0-.8.18-1.1.5-.25.3-.46.64-.6 1Z"/>',
+ search:'<circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/>', bell:'<path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9"/><path d="M10 21h4"/>',
+ x:'<path d="m6 6 12 12M18 6 6 18"/>', phone:'<path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.69 2.8a2 2 0 0 1-.45 2.11L8.1 9.9a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.33 1.84.56 2.8.69A2 2 0 0 1 22 16.92Z"/>',
+ mail:'<rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/>', message:'<path d="M21 15a4 4 0 0 1-4 4H8l-5 3V7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4Z"/>',
+ calendar:'<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 10h18"/>', file:'<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/><path d="M14 2v6h6M8 13h8M8 17h6"/>',
+ note:'<path d="M4 4h16v16H4z"/><path d="M8 8h8M8 12h8M8 16h5"/>', user:'<circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/>',
+ globe:'<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a15 15 0 0 1 0 18M12 3a15 15 0 0 0 0 18"/>', tag:'<path d="M20 13 13 20 4 11V4h7l9 9Z"/><circle cx="8.5" cy="8.5" r="1.5"/>',
+ clock:'<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>', plus:'<path d="M12 5v14M5 12h14"/>'
+};
+function zxI(name){return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${zxIcons[name]||zxIcons.file}</svg>`}
+function zxInitials(n=''){return n.trim().split(/\s+/).slice(0,2).map(x=>x[0]||'').join('').toUpperCase()||'ZX'}
+function zxModernizeChrome(){
+ const names=['home','target','columns','users','wallet','check','chart','briefcase','settings'];
+ document.querySelectorAll('.nav-icon').forEach((e,i)=>e.innerHTML=zxI(names[i]||'file'));
+ const mi=['target','users','wallet','chart']; document.querySelectorAll('.metric-icon').forEach((e,i)=>e.innerHTML=zxI(mi[i]||'chart'));
+ const b=document.querySelector('.notification'); if(b){const n=cache.tasks?.filter(t=>!t.done).length||0;b.innerHTML=zxI('bell')+`<span class="zx-bell-count">${n}</span>`;}
+}
+const _oldUpdateBell=updateBell;
+updateBell=function(){const n=cache.tasks.filter(t=>!t.done && (!t.due||t.due<=new Date(Date.now()+86400000).toISOString().slice(0,10))).length;const b=document.querySelector('.notification');if(b){b.innerHTML=zxI('bell')+`<span class="zx-bell-count">${n}</span>`;b.onclick=()=>showPage('tasks');}}
+
+/* Rich client portfolio */
+renderClients=function(){
+ const grid=document.querySelector('#clients .client-grid'); if(!grid)return;
+ const rows=cache.clients.map(c=>{
+   const lead=cache.leads.find(l=>l.id===c.leadId)||{};
+   const sales=cache.sales.filter(s=>s.leadId===c.leadId);
+   const totalEUR=sales.filter(s=>s.currency==='EUR').reduce((a,s)=>a+Number(s.amount||0),0);
+   const totalCLP=sales.filter(s=>s.currency==='CLP').reduce((a,s)=>a+Number(s.amount||0),0);
+   const value=[totalEUR?money(totalEUR,'EUR'):'',totalCLP?money(totalCLP,'CLP'):''].filter(Boolean).join(' · ')||'Sin ventas';
+   const open=`${c.leadId?`onclick="open360('${c.leadId}')"`:''}`;
+   return `<div class="zx-client-row" ${open}>
+    <div class="zx-client-main"><div class="zx-avatar-modern">${safe(zxInitials(c.name))}</div><div><strong>${safe(c.name||'Cliente')}</strong><small>${safe(c.company||'Sin empresa')} · ${safe(c.country||'')}</small></div></div>
+    <div class="zx-cell"><strong>${safe(c.service||lead.service||'Sin servicio')}</strong><small>${safe(lead.source||'Origen no informado')}</small></div>
+    <div class="zx-cell"><span class="zx-status-pill"><i class="zx-dot"></i>Activo</span></div>
+    <div class="zx-cell"><strong>${value}</strong><small>Valor acumulado</small></div>
+    <div class="zx-row-actions">
+      <a class="zx-icon-btn" title="WhatsApp" href="https://wa.me/${String(c.phone||'').replace(/\D/g,'')}" target="_blank" onclick="event.stopPropagation()">${zxI('message')}</a>
+      <a class="zx-icon-btn" title="Llamar" href="tel:${safe(c.phone||'')}" onclick="event.stopPropagation()">${zxI('phone')}</a>
+      <a class="zx-icon-btn" title="Email" href="mailto:${safe(c.email||'')}" onclick="event.stopPropagation()">${zxI('mail')}</a>
+      ${c.leadId?`<button class="zx-icon-btn" title="Abrir ficha 360" onclick="event.stopPropagation();open360('${c.leadId}')">${zxI('user')}</button>`:''}
+    </div>
+   </div>`;
+ }).join('');
+ grid.innerHTML=`<div class="zx-client-toolbar"><div class="zx-client-filters"><button class="zx-chip">Todos · ${cache.clients.length}</button><button class="zx-chip">Chile</button><button class="zx-chip">España</button><button class="zx-chip">Clientes activos</button></div><button class="new-button" onclick="openLeadModal()">${zxI('plus')} Nuevo contacto</button></div><div class="zx-client-list">${rows||'<div class="zx-empty-modern">Los clientes aparecerán aquí cuando una oportunidad pase a Ganado.</div>'}</div>`;
+}
+
+/* Modern pipeline with Negotiation stage */
+stages=['Nuevo','Contactado','Propuesta','Negociación','Ganado','Perdido'];
+renderPipeline=function(){
+ const el=document.querySelector('#pipeline .pipeline');if(!el)return;
+ el.classList.add('zx-pipeline-v2');el.style.gridTemplateColumns='repeat(6,minmax(220px,1fr))';
+ el.innerHTML=stages.map(st=>{
+  const arr=cache.leads.filter(x=>(x.status||'Nuevo')===st);
+  const eur=arr.filter(x=>(x.currency||'EUR')==='EUR').reduce((a,x)=>a+Number(x.value||0),0);
+  const clp=arr.filter(x=>x.currency==='CLP').reduce((a,x)=>a+Number(x.value||0),0);
+  return `<div class="stage" data-stage="${st}" ondragover="event.preventDefault()" ondrop="dropLead(event,'${st}')">
+   <div class="stage-title"><span>${st}</span><b>${arr.length}</b></div>
+   <div class="zx-mini" style="padding:0 4px 10px">${[eur?money(eur,'EUR'):'',clp?money(clp,'CLP'):''].filter(Boolean).join(' · ')||'Sin valor'}</div>
+   ${arr.map(l=>`<div class="deal" draggable="true" ondragstart="event.dataTransfer.setData('text/plain','${l.id}')" onclick="open360('${l.id}')">
+    <div class="zx-person"><div class="mini-avatar" style="font-size:0">${zxI(l.profileType==='Empresa'?'briefcase':'user')}</div><div><strong>${safe(l.name)}</strong><span>${safe(l.company||'Sin empresa')}</span></div></div>
+    <div class="zx-mini" style="margin-top:9px">${safe(l.service||'Sin servicio')}</div>
+    <div class="zx-deal-meta"><span>${l.value?money(l.value,l.currency):'Sin valorar'}</span><span class="zx-priority ${safe(l.priority||'Media')}">${safe(l.priority||'Media')}</span></div>
+   </div>`).join('')}
+  </div>`;
+ }).join('');
+}
+
+/* Styled lost-opportunity modal */
+let zxPendingLost=null,zxLostReason='';
+function zxAskLost(id){
+ zxPendingLost=id;zxLostReason='';$('zxLostComment').value='';
+ const reasons=['Precio','Competencia','Sin respuesta','Aplazado','No encaja','Otro'];
+ $('zxLostReasons').innerHTML=reasons.map(r=>`<button type="button" class="zx-reason" data-r="${r}">${r}</button>`).join('');
+ $('zxLostReasons').querySelectorAll('button').forEach(b=>b.addEventListener('click',()=>{$('zxLostReasons').querySelectorAll('button').forEach(x=>x.classList.remove('active'));b.classList.add('active');zxLostReason=b.dataset.r}));
+ $('zxLostModal').classList.add('show');$('zxLostModal').setAttribute('aria-hidden','false');
+}
+$('zxLostCancel').addEventListener('click',()=>{$('zxLostModal').classList.remove('show');zxPendingLost=null});
+$('zxLostSave').addEventListener('click',async()=>{if(!zxPendingLost||!zxLostReason)return alert('Selecciona un motivo.');const id=zxPendingLost,comment=val('zxLostComment');$('zxLostModal').classList.remove('show');await db.collection('leads').doc(id).update({status:'Perdido',lostReason:zxLostReason,lostComment:comment,updatedAt:ts()});await logActivity(id,'status',`Oportunidad perdida · ${zxLostReason}`,{reason:zxLostReason,comment});zxPendingLost=null;setTimeout(()=>open360(id),150)});
+const _dropLeadTop=dropLead;
+dropLead=async function(e,status){const id=e.dataTransfer.getData('text/plain'),lead=cache.leads.find(x=>x.id===id);if(!lead)return;if(status==='Perdido'){zxAskLost(id);return}await db.collection('leads').doc(id).update({status,updatedAt:ts()});await logActivity(id,'status',`Estado cambiado a ${status}`,{status});if(status==='Ganado')await convertWon(lead)}
+
+/* Full record workspace */
+async function open360(id){
+ const l=cache.leads.find(x=>x.id===id);if(!l)return;
+ const d=$('drawer360');d.classList.add('open');
+ const cur=l.currency||((l.country==='Chile')?'CLP':'EUR');
+ const created=l.createdAt?.toDate?.(); const days=created?Math.max(0,Math.floor((Date.now()-created.getTime())/86400000)):0;
+ const acts=await db.collection('leads').doc(id).collection('activities').orderBy('createdAt','desc').limit(8).get();
+ const activityHTML=acts.docs.map(doc=>{const a=doc.data();return `<div class="zx-event"><b>${safe(a.text||a.type||'Actividad')}</b><span>${a.createdAt?.toDate?.().toLocaleString('es-ES')||'Ahora'}</span></div>`}).join('')||'<div class="zx-empty">Sin actividad todavía.</div>';
+ const status=l.status||'Nuevo';
+ $('drawerBody').innerHTML=`
+  <div class="zx360-head"><div class="zx360-top"><div class="zx-avatar">${zxI(l.profileType==='Empresa'?'briefcase':'user')}</div><div class="zx360-title"><small>${safe(l.brand||BRAND)} · ${safe(l.source||'Manual')}</small><h2>${safe(l.name||'Sin nombre')}</h2><p>${safe(l.company||l.service||'Oportunidad comercial')}</p></div><button class="zx-close" onclick="close360()">${zxI('x')}</button></div></div>
+  <div class="zx360-body">
+   <div class="zx-record-top">
+    <div class="zx-stagebar">${stages.map(s=>`<button class="zx-stagebtn ${status===s?'active ':''}${s==='Ganado'?'won':''}${s==='Perdido'?'lost':''}" onclick="${s==='Perdido'?`zxAskLost('${id}')`:`zxSetStatus('${id}','${s}')`}">${s}</button>`).join('')}</div>
+    <div class="zx-top-actions"><a class="zx-action-secondary" href="https://wa.me/${String(l.phone||'').replace(/\D/g,'')}" target="_blank">${zxI('message')} WhatsApp</a><a class="zx-action-secondary" href="mailto:${safe(l.email||'')}">${zxI('mail')} Email</a><button class="zx-action-primary" onclick="zxAddActivity('${id}')">${zxI('plus')} Registrar actividad</button></div>
+   </div>
+   <div class="zx-tabs"><button class="zx-tab active" data-zxtab="summary" onclick="zxTab('summary')">Resumen 360°</button><button class="zx-tab" data-zxtab="commercial" onclick="zxTab('commercial')">Información</button><button class="zx-tab" data-zxtab="quotes" onclick="zxTab('quotes')">Presupuestos</button><button class="zx-tab" data-zxtab="history" onclick="zxTab('history')">Actividad</button></div>
+   <section id="zx-summary" class="zx-pane active">
+    <div class="zx-insight-grid">
+      <div class="zx-insight"><small>OPORTUNIDAD</small><b>${l.value?money(l.value,cur):'—'}</b><em>${safe(l.service||'Sin servicio')}</em></div>
+      <div class="zx-insight"><small>DÍAS EN FUNNEL</small><b>${days}</b><em>Desde la creación</em></div>
+      <div class="zx-insight"><small>PRIORIDAD</small><b>${safe(l.priority||'Media')}</b><em>${status}</em></div>
+      <div class="zx-insight"><small>ACTIVIDADES</small><b>${acts.size}</b><em>Últimos registros</em></div>
+    </div>
+    <div class="zx-360-layout">
+      <div class="zx-left">
+       <div class="zx-card zx-profile-card">
+        <div class="zx-profile-hero"><div class="zx-avatar-modern">${safe(zxInitials(l.name))}</div><div><strong>${safe(l.name)}</strong><div class="zx-mini">${safe(l.company||'Contacto')}</div></div></div>
+        <div class="zx-profile-line">${zxI('phone')}<div><b>Teléfono</b><span>${safe(l.phone||'—')}</span></div></div>
+        <div class="zx-profile-line">${zxI('mail')}<div><b>Email</b><span>${safe(l.email||'—')}</span></div></div>
+        <div class="zx-profile-line">${zxI('globe')}<div><b>País</b><span>${safe(l.country||'—')}</span></div></div>
+        <div class="zx-profile-line">${zxI('tag')}<div><b>Servicio</b><span>${safe(l.service||'—')}</span></div></div>
+        <div class="zx-profile-line">${zxI('target')}<div><b>Origen</b><span>${safe(l.source||'Manual')} · ${safe(l.sourceDetail||'CRM')}</span></div></div>
+       </div>
+      </div>
+      <div class="zx-center">
+       <div class="zx-card"><div style="display:flex;justify-content:space-between;align-items:center;gap:10px"><div><h3>Actividad reciente</h3><div class="zx-mini">Historia comercial del contacto</div></div><button class="zx-action-secondary" onclick="zxTab('history')">Ver historial</button></div><div class="zx-timeline" style="margin-top:18px">${activityHTML}</div></div>
+       <div class="zx-card"><h3>Notas del equipo</h3><div class="zx-field"><textarea id="zxNotes">${safe(l.notes||'')}</textarea></div><button class="zx-action-primary" style="margin-top:10px" onclick="db.collection('leads').doc('${id}').update({notes:val('zxNotes'),updatedAt:ts()}).then(()=>logActivity('${id}','note','Notas actualizadas'))">${zxI('check')} Guardar nota</button></div>
+      </div>
+      <div class="zx-right">
+       <div class="zx-card zx-next-card"><h3>Próxima acción</h3><div class="zx-next-item">${zxI('calendar')}<div><strong>${safe(l.nextAction||'Definir seguimiento')}</strong><small>${safe(l.nextActionDate||'Sin fecha programada')}</small></div></div><div class="zx-quick-grid"><button onclick="zxAddActivity('${id}')">${zxI('phone')} Llamada</button><button onclick="zxAddActivity('${id}')">${zxI('message')} WhatsApp</button><button onclick="zxAddActivity('${id}')">${zxI('calendar')} Reunión</button><button onclick="zxTab('quotes')">${zxI('file')} Presupuesto</button></div></div>
+       <div class="zx-card"><h3>Estado comercial</h3><div class="zx-profile-line">${zxI('clock')}<div><b>Etapa actual</b><span>${safe(status)}</span></div></div><div class="zx-profile-line">${zxI('wallet')}<div><b>Valor estimado</b><span>${l.value?money(l.value,cur):'Sin valorar'}</span></div></div><div class="zx-profile-line">${zxI('user')}<div><b>Responsable</b><span>Miguel · Administrador</span></div></div></div>
+      </div>
+    </div>
+   </section>
+   <section id="zx-commercial" class="zx-pane"><div class="zx-card"><h3>Información comercial</h3><div class="zx-grid">
+    <div class="zx-field"><label>Nombre / Razón social</label><input id="zxName" value="${safe(l.name)}"></div><div class="zx-field"><label>Empresa</label><input id="zxCompany" value="${safe(l.company||'')}"></div>
+    <div class="zx-field"><label>Tipo de perfil</label><select id="zxProfileType"><option ${l.profileType==='Persona'?'selected':''}>Persona</option><option ${l.profileType==='Hombre'?'selected':''}>Hombre</option><option ${l.profileType==='Mujer'?'selected':''}>Mujer</option><option ${l.profileType==='Empresa'?'selected':''}>Empresa</option></select></div><div class="zx-field"><label>Prioridad</label><select id="zxPriority"><option ${l.priority==='Baja'?'selected':''}>Baja</option><option ${!l.priority||l.priority==='Media'?'selected':''}>Media</option><option ${l.priority==='Alta'?'selected':''}>Alta</option></select></div>
+    <div class="zx-field"><label>Email</label><input id="zxEmail" value="${safe(l.email||'')}"></div><div class="zx-field"><label>Teléfono</label><input id="zxPhone" value="${safe(l.phone||'')}"></div>
+    <div class="zx-field"><label>País</label><select id="zxCountry"><option ${l.country==='España'?'selected':''}>España</option><option ${l.country==='Chile'?'selected':''}>Chile</option></select></div><div class="zx-field"><label>Servicio</label><input id="zxService" value="${safe(l.service||'')}"></div>
+    <div class="zx-field"><label>Valor estimado</label><input id="zxValue" type="number" value="${Number(l.value||0)}"></div><div class="zx-field"><label>Moneda</label><select id="zxCurrency"><option ${cur==='EUR'?'selected':''}>EUR</option><option ${cur==='CLP'?'selected':''}>CLP</option></select></div>
+    <div class="zx-field"><label>Próxima acción</label><input id="zxNextAction" value="${safe(l.nextAction||'')}"></div><div class="zx-field"><label>Fecha próxima acción</label><input id="zxNextDate" type="date" value="${safe(l.nextActionDate||'')}"></div>
+   </div><div class="zx-field" style="margin-top:12px"><label>Notas</label><textarea id="zxNotes">${safe(l.notes||'')}</textarea></div><button class="zx-action-primary" style="margin-top:12px" onclick="zxSaveProfile('${id}')">${zxI('check')} Guardar cambios</button></div></section>
+   <section id="zx-quotes" class="zx-pane"><div class="zx-card"><h3>Crear presupuesto</h3><div class="zx-grid"><div class="zx-field"><label>Nombre propuesta</label><input id="zxQTitle" value="Propuesta ${safe(l.service||'ZIEGENX')}"></div><div class="zx-field"><label>Moneda</label><select id="zxQCurrency" onchange="zxCalcQuote()"><option ${cur==='EUR'?'selected':''}>EUR</option><option ${cur==='CLP'?'selected':''}>CLP</option></select></div><div class="zx-field"><label>Precio base</label><input id="zxQBase" type="number" value="${Number(l.value||0)}" oninput="zxCalcQuote()"></div><div class="zx-field"><label>Descuento %</label><input id="zxQDisc" type="number" value="0" oninput="zxCalcQuote()"></div><div class="zx-field"><label>Impuesto %</label><input id="zxQTax" type="number" value="0" oninput="zxCalcQuote()"></div><div><div class="zx-mini">TOTAL</div><div class="zx-quote-total" id="zxQTotal">${money(Number(l.value||0),cur)}</div></div></div><div class="zx-field" style="margin-top:12px"><label>Detalle / alcance</label><textarea id="zxQDetails" placeholder="Diseño, desarrollo, CRM, soporte, plazos..."></textarea></div><button class="zx-action-primary" style="margin-top:12px" onclick="zxSaveQuote('${id}')">${zxI('file')} Guardar presupuesto</button></div><div id="zxQuoteList"></div></section>
+   <section id="zx-history" class="zx-pane"><div class="zx-card"><div style="display:flex;justify-content:space-between;align-items:center"><div><h3>Actividad e historial</h3><div class="zx-mini">Llamadas, mensajes, cambios de etapa, presupuestos y notas</div></div><button class="zx-action-primary" onclick="zxAddActivity('${id}')">${zxI('plus')} Actividad</button></div><div id="zxHistory" style="margin-top:18px">Cargando…</div></div></section>
+  </div>`;
+ zxLoadQuotes(id);zxLoadHistory(id);
+}
+
+/* Avoid native prompt for stage loss from the 360 status bar */
+const _zxSetStatusTop=zxSetStatus;
+zxSetStatus=async function(id,status){
+ if(status==='Perdido'){zxAskLost(id);return}
+ const l=cache.leads.find(x=>x.id===id);if(!l)return;
+ await db.collection('leads').doc(id).update({status,updatedAt:ts()});
+ await logActivity(id,'status',`Estado cambiado a ${status}`,{status});
+ if(status==='Ganado')await convertWon(l);
+ setTimeout(()=>open360(id),160);
+}
+
+const _renderAllTop=renderAll;
+renderAll=function(){_renderAllTop();zxModernizeChrome()}
+zxModernizeChrome();
+</script>
+
 </body>
 </html>
