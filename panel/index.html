@@ -849,8 +849,8 @@
     <p>Gestiona tus oportunidades, clientes, ventas y tareas desde un solo lugar.</p>
 
     <div class="field">
-      <label>Email</label>
-      <input id="loginEmail" type="email" placeholder="tu@email.com">
+      <label>Usuario</label>
+      <input id="loginEmail" type="text" placeholder="Admin1980" autocomplete="username">
     </div>
 
     <div class="field">
@@ -861,7 +861,7 @@
     <button class="login-button" onclick="enterCRM()">Entrar al CRM</button>
 
     <div class="login-demo">
-      DEMO VISUAL · La autenticación segura se conectará en la siguiente etapa.
+      ACCESO SEGURO · Protegido con Firebase Authentication
     </div>
   </div>
 </section>
@@ -911,6 +911,11 @@
     <div class="nav-item" data-page="reports">
       <span class="nav-icon">▥</span>
       <span>Reportes</span>
+    </div>
+
+    <div class="nav-item" data-page="projects">
+      <span class="nav-icon">◇</span>
+      <span>Proyectos</span>
     </div>
 
     <div class="nav-item" data-page="settings">
@@ -1400,6 +1405,12 @@
       </section>
 
 
+      <!-- PROJECTS -->
+      <section id="projects" class="page">
+        <div class="heading"><div><h1>Proyectos</h1><p>Entrega y seguimiento después de cada venta.</p></div><button class="new-button" onclick="openQuickModal('project')">＋ Nuevo proyecto</button></div>
+        <div id="projectsBoard" class="pipeline"></div>
+      </section>
+
       <!-- SETTINGS -->
       <section id="settings" class="page">
         <div class="heading">
@@ -1510,7 +1521,7 @@
       </div>
 
       <div class="full">
-        <button class="save-btn" onclick="saveDemoLead()">Guardar lead</button>
+        <button class="save-btn" onclick="saveLead()">Guardar lead</button>
       </div>
 
     </div>
@@ -1518,99 +1529,91 @@
 </div>
 
 
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
 <script>
 
-  function enterCRM(){
-    document.getElementById("loginScreen").style.display="none";
-    document.getElementById("app").style.display="block";
+  const firebaseConfig = {
+    apiKey: "AIzaSyBoe6ovquS9Qwag-4mU7_e49nN-ckwJWYe0",
+    authDomain: "ziegenx-crm.firebaseapp.com",
+    projectId: "ziegenx-crm",
+    storageBucket: "ziegenx-crm.firebasestorage.app",
+    messagingSenderId: "15787144621",
+    appId: "1:15787144621:web:47788f604949659c7a5d24"
+  };
+  firebase.initializeApp(firebaseConfig);
+  const auth=firebase.auth(), db=firebase.firestore();
+  const BRAND='ZIEGENX';
+  let cache={leads:[],clients:[],sales:[],tasks:[],projects:[]}, unsub=[];
+  const $=id=>document.getElementById(id);
+  const money=(n,c='EUR')=>new Intl.NumberFormat(c==='CLP'?'es-CL':'es-ES',{style:'currency',currency:c,maximumFractionDigits:c==='CLP'?0:2}).format(Number(n||0));
+  const safe=s=>String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));
+  const ts=()=>firebase.firestore.FieldValue.serverTimestamp();
+  const val=id=>($(id)?.value||'').trim();
+  function userEmail(u){u=u.trim(); return u.includes('@')?u:(u.toLowerCase()==='admin1980'?'admin1980@ziegenx.com':u+'@ziegenx.com');}
+
+  async function enterCRM(){
+    const btn=document.querySelector('.login-button'); btn.disabled=true; btn.textContent='Ingresando…';
+    try{ await auth.signInWithEmailAndPassword(userEmail(val('loginEmail')),val('loginPassword')); }
+    catch(e){ alert('No pudimos iniciar sesión. Revisa usuario y contraseña.\n\n'+(e.code||'')); btn.disabled=false; btn.textContent='Entrar al CRM'; }
   }
-
-  document.querySelectorAll(".nav-item").forEach(item=>{
-    item.addEventListener("click",()=>{
-      const page=item.dataset.page;
-      showPage(page);
-
-      document.querySelectorAll(".nav-item").forEach(i=>i.classList.remove("active"));
-      item.classList.add("active");
-    });
+  auth.onAuthStateChanged(user=>{
+    if(user){ $('loginScreen').style.display='none'; $('app').style.display='block'; startRealtime(); }
+    else { $('loginScreen').style.display='flex'; $('app').style.display='none'; stopRealtime(); }
   });
+  function logout(){auth.signOut();}
 
-  function showPage(page){
-    document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
-    document.getElementById(page).classList.add("active");
+  document.querySelectorAll('.nav-item').forEach(item=>item.addEventListener('click',()=>showPage(item.dataset.page)));
+  function showPage(page){document.querySelectorAll('.page').forEach(p=>p.classList.remove('active')); $(page)?.classList.add('active'); document.querySelectorAll('.nav-item').forEach(i=>i.classList.toggle('active',i.dataset.page===page));}
+  function openLeadModal(){ $('leadModal').classList.add('show'); }
+  function closeLeadModal(){ $('leadModal').classList.remove('show'); }
+  $('leadModal').addEventListener('click',e=>{if(e.target.id==='leadModal')closeLeadModal()});
 
-    document.querySelectorAll(".nav-item").forEach(i=>{
-      i.classList.toggle("active",i.dataset.page===page);
-    });
+  async function logActivity(leadId,type,text,meta={}){ if(!leadId)return; await db.collection('leads').doc(leadId).collection('activities').add({type,text,...meta,createdAt:ts(),createdBy:auth.currentUser.uid}); }
+  async function saveLead(){
+    const name=val('leadName'); if(!name)return alert('Ingresa el nombre del lead.');
+    const data={name,company:val('leadCompany'),email:val('leadEmail'),phone:val('leadPhone'),country:$('leadCountry').value,service:$('leadService').value,value:Number(val('leadValue')||0),currency:$('leadCountry').value==='Chile'?'CLP':'EUR',status:'Nuevo',source:'Manual',sourceDetail:'CRM ZIEGENX',brand:BRAND,notes:'',createdAt:ts(),updatedAt:ts(),createdBy:auth.currentUser.uid};
+    const ref=await db.collection('leads').add(data); await logActivity(ref.id,'lead','Lead creado',''); closeLeadModal(); ['leadName','leadCompany','leadEmail','leadPhone','leadValue'].forEach(x=>$(x).value=''); showPage('leads');
   }
 
-  function openLeadModal(){
-    document.getElementById("leadModal").classList.add("show");
-  }
+  function stopRealtime(){unsub.forEach(f=>f());unsub=[];}
+  function startRealtime(){ stopRealtime(); ['leads','clients','sales','tasks','projects'].forEach(col=>unsub.push(db.collection(col).where('brand','==',BRAND).onSnapshot(s=>{cache[col]=s.docs.map(d=>({id:d.id,...d.data()}));renderAll();},console.error))); }
+  function renderAll(){renderLeads();renderPipeline();renderClients();renderSales();renderTasks();renderProjects();renderDashboard();renderReports();}
+  function statusBadge(st){const cls=st==='Ganado'?'badge-win':st==='Propuesta'?'badge-proposal':st==='Contactado'?'badge-contact':st==='Perdido'?'badge-lost':'badge-new';return `<span class="badge ${cls}">${safe(st||'Nuevo')}</span>`;}
+  function renderLeads(){const tb=$('allLeads');if(!tb)return;tb.innerHTML=cache.leads.sort(dateSort).map(l=>`<tr class="clickable-row" onclick="open360('${l.id}')"><td><strong>${safe(l.name)}</strong><small class="subline">${safe(l.source||'Manual')}</small></td><td>${safe(l.company||'—')}</td><td>${safe(l.service||'—')}</td><td>${l.country==='Chile'?'🇨🇱':'🇪🇸'} ${safe(l.country||'—')}</td><td>${statusBadge(l.status)}</td><td>${l.value?money(l.value,l.currency):'—'}</td></tr>`).join('')||'<tr><td colspan="6">Aún no hay leads.</td></tr>';}
+  function dateSort(a,b){return (b.createdAt?.seconds||0)-(a.createdAt?.seconds||0)}
+  const stages=['Nuevo','Contactado','Propuesta','Ganado','Perdido'];
+  function renderPipeline(){const el=document.querySelector('#pipeline .pipeline');if(!el)return;el.style.gridTemplateColumns='repeat(5,minmax(190px,1fr))';el.innerHTML=stages.map(st=>`<div class="stage" data-stage="${st}" ondragover="event.preventDefault()" ondrop="dropLead(event,'${st}')"><div class="stage-title"><span>${st}</span><b>${cache.leads.filter(x=>(x.status||'Nuevo')===st).length}</b></div>${cache.leads.filter(x=>(x.status||'Nuevo')===st).map(l=>`<div class="deal" draggable="true" ondragstart="event.dataTransfer.setData('text/plain','${l.id}')" onclick="open360('${l.id}')"><strong>${safe(l.name)}</strong><span>${safe(l.service||'Sin servicio')}</span><b>${l.value?money(l.value,l.currency):''}</b></div>`).join('')}</div>`).join('');}
+  async function dropLead(e,status){const id=e.dataTransfer.getData('text/plain'),lead=cache.leads.find(x=>x.id===id);if(!lead)return;let reason='';if(status==='Perdido'){reason=prompt('Motivo de pérdida:')||'Sin especificar';}await db.collection('leads').doc(id).update({status,lostReason:reason,updatedAt:ts()});await logActivity(id,'status',`Estado cambiado a ${status}`,{status,reason});if(status==='Ganado')await convertWon(lead);}
+  async function convertWon(l){const existing=cache.clients.find(c=>c.leadId===l.id);if(!existing)await db.collection('clients').add({leadId:l.id,name:l.name,company:l.company||'',email:l.email||'',phone:l.phone||'',country:l.country||'',service:l.service||'',brand:BRAND,createdAt:ts()});const sale=cache.sales.find(s=>s.leadId===l.id);if(!sale)await db.collection('sales').add({leadId:l.id,clientName:l.name,service:l.service||'',amount:Number(l.value||0),currency:l.currency||'EUR',status:'Pendiente',paymentMethod:'Por definir',paymentType:'Único',brand:BRAND,date:new Date().toISOString().slice(0,10),createdAt:ts()});}
+  function renderClients(){const grid=document.querySelector('#clients .client-grid');if(!grid)return;grid.innerHTML=cache.clients.map(c=>`<div class="client-card"><div class="avatar">${safe((c.name||'?').slice(0,1))}</div><h3>${safe(c.name)}</h3><p>${safe(c.company||c.service||'Cliente')}</p><div class="client-actions"><a href="https://wa.me/${String(c.phone||'').replace(/\D/g,'')}" target="_blank">WhatsApp</a><a href="mailto:${safe(c.email||'')}">Email</a></div></div>`).join('')||'<div class="panel">Los clientes aparecerán automáticamente al ganar negocios.</div>';}
+  function renderSales(){const table=document.querySelector('#sales table tbody');if(table)table.innerHTML=cache.sales.map(s=>`<tr><td>${safe(s.clientName)}</td><td>${safe(s.service)}</td><td>${money(s.amount,s.currency)}</td><td>${safe(s.date||'')}</td><td>${statusBadge(s.status)}</td><td>${safe(s.paymentMethod||'—')}</td></tr>`).join('');}
+  function renderTasks(){const sec=$('tasks');if(!sec)return;let host=sec.querySelector('.tasks-dynamic');if(!host){sec.querySelectorAll('.task').forEach(x=>x.remove());host=document.createElement('div');host.className='tasks-dynamic';sec.appendChild(host);const b=document.createElement('button');b.className='new-button';b.textContent='＋ Nueva tarea';b.onclick=()=>openQuickModal('task');sec.querySelector('.heading')?.appendChild(b);}host.innerHTML=cache.tasks.sort((a,b)=>(a.due||'').localeCompare(b.due||'')).map(t=>`<div class="task"><input type="checkbox" ${t.done?'checked':''} onchange="toggleTask('${t.id}',this.checked)"><div class="task-content"><strong>${safe(t.title)}</strong><span>${safe(t.clientName||'')} · ${safe(t.priority||'Normal')}</span></div><div class="task-date">${safe(t.due||'Sin fecha')}</div></div>`).join('')||'<div class="panel">No hay tareas pendientes.</div>';updateBell();}
+  async function toggleTask(id,done){await db.collection('tasks').doc(id).update({done,updatedAt:ts()});}
+  function updateBell(){const n=cache.tasks.filter(t=>!t.done && (!t.due||t.due<=new Date(Date.now()+86400000).toISOString().slice(0,10))).length;const b=document.querySelector('.notification');if(b){b.textContent='🔔 '+n;b.onclick=()=>showPage('tasks');}}
+  function renderProjects(){const el=$('projectsBoard');if(!el)return;const ps=['Vendido','Diseño','Desarrollo','Revisión cliente','Publicado','Mantenimiento'];el.style.gridTemplateColumns='repeat(3,1fr)';el.innerHTML=ps.map(st=>`<div class="stage"><div class="stage-title"><span>${st}</span><b>${cache.projects.filter(p=>p.status===st).length}</b></div>${cache.projects.filter(p=>p.status===st).map(p=>`<div class="deal"><strong>${safe(p.name)}</strong><span>${safe(p.clientName||'')}</span></div>`).join('')}</div>`).join('');}
+  function renderDashboard(){const leads=cache.leads.length,clients=cache.clients.length,won=cache.leads.filter(l=>l.status==='Ganado').length;const nums=document.querySelectorAll('#dashboard .metric-number');if(nums[0])nums[0].textContent=leads;if(nums[1])nums[1].textContent=clients;if(nums[2]){const eur=cache.sales.filter(s=>s.currency==='EUR'&&s.status!=='Anulado').reduce((a,s)=>a+Number(s.amount||0),0);nums[2].textContent=money(eur,'EUR');}if(nums[3])nums[3].textContent=leads?Math.round(won/leads*100)+'%':'0%';}
+  function renderReports(){const nums=document.querySelectorAll('#reports .metric-number');if(!nums.length)return;const leads=cache.leads.length,won=cache.leads.filter(l=>l.status==='Ganado').length;nums[0].textContent=leads;nums[1].textContent=leads?Math.round(won/leads*100)+'%':'0%';nums[2].textContent=cache.clients.length;nums[3].textContent=money(cache.sales.filter(s=>s.currency==='EUR').reduce((a,s)=>a+Number(s.amount||0),0),'EUR');}
 
-  function closeLeadModal(){
-    document.getElementById("leadModal").classList.remove("show");
-  }
+  async function open360(id){const l=cache.leads.find(x=>x.id===id);if(!l)return;const d=$('drawer360');d.classList.add('open');$('drawerBody').innerHTML=`<div class="drawer-head"><div><small>${safe(l.brand||BRAND)} · ${safe(l.source||'Manual')}</small><h2>${safe(l.name)}</h2><p>${safe(l.company||'')}</p></div><button onclick="close360()">✕</button></div><div class="quick-actions"><a href="https://wa.me/${String(l.phone||'').replace(/\D/g,'')}" target="_blank">WhatsApp</a><a href="mailto:${safe(l.email||'')}">Email</a><a href="tel:${safe(l.phone||'')}">Llamar</a></div><div class="detail-grid"><div><b>Teléfono</b><span>${safe(l.phone||'—')}</span></div><div><b>Email</b><span>${safe(l.email||'—')}</span></div><div><b>País</b><span>${safe(l.country||'—')}</span></div><div><b>Servicio</b><span>${safe(l.service||'—')}</span></div><div><b>Valor</b><span>${l.value?money(l.value,l.currency):'—'}</span></div><div><b>Estado</b><span>${safe(l.status||'Nuevo')}</span></div></div><label class="drawer-label">Notas</label><textarea id="drawerNotes">${safe(l.notes||'')}</textarea><button class="new-button" onclick="saveNotes('${id}')">Guardar notas</button><div class="activity-title"><h3>Actividad e historial</h3><button onclick="addActivity('${id}')">＋ Actividad</button></div><div id="activityList">Cargando…</div>`;const s=await db.collection('leads').doc(id).collection('activities').orderBy('createdAt','desc').get();$('activityList').innerHTML=s.docs.map(x=>{const a=x.data();return `<div class="activity"><i></i><div><strong>${safe(a.text)}</strong><span>${a.createdAt?.toDate?.().toLocaleString('es-ES')||'Ahora'}</span></div></div>`}).join('')||'<p>Sin actividad todavía.</p>';}
+  function close360(){$('drawer360').classList.remove('open')}
+  async function saveNotes(id){await db.collection('leads').doc(id).update({notes:val('drawerNotes'),updatedAt:ts()});await logActivity(id,'note','Notas actualizadas');}
+  async function addActivity(id){const text=prompt('Describe la actividad (llamada, WhatsApp, reunión, propuesta…):');if(text)await logActivity(id,'manual',text),open360(id);}
 
-  document.getElementById("leadModal").addEventListener("click",(e)=>{
-    if(e.target.id==="leadModal") closeLeadModal();
-  });
+  function openQuickModal(type){const m=$('quickModal');m.classList.add('show');const body=$('quickBody');if(type==='task')body.innerHTML=`<h2>Nueva tarea</h2><input id="qTitle" placeholder="Ej. Llamar a Juan"><input id="qClient" placeholder="Cliente / lead"><input id="qDue" type="date"><select id="qPriority"><option>Normal</option><option>Alta</option><option>Urgente</option></select><button class="save-btn" onclick="saveQuickTask()">Guardar tarea</button>`;else body.innerHTML=`<h2>Nuevo proyecto</h2><input id="qTitle" placeholder="Nombre del proyecto"><input id="qClient" placeholder="Cliente"><select id="qStatus"><option>Vendido</option><option>Diseño</option><option>Desarrollo</option><option>Revisión cliente</option><option>Publicado</option><option>Mantenimiento</option></select><button class="save-btn" onclick="saveQuickProject()">Guardar proyecto</button>`;}
+  async function saveQuickTask(){if(!val('qTitle'))return;await db.collection('tasks').add({title:val('qTitle'),clientName:val('qClient'),due:val('qDue'),priority:$('qPriority').value,done:false,brand:BRAND,createdAt:ts()});$('quickModal').classList.remove('show');}
+  async function saveQuickProject(){if(!val('qTitle'))return;await db.collection('projects').add({name:val('qTitle'),clientName:val('qClient'),status:$('qStatus').value,brand:BRAND,createdAt:ts()});$('quickModal').classList.remove('show');}
 
-  function saveDemoLead(){
-
-    const name=document.getElementById("leadName").value.trim();
-    const company=document.getElementById("leadCompany").value.trim();
-    const country=document.getElementById("leadCountry").value;
-    const service=document.getElementById("leadService").value;
-    const value=document.getElementById("leadValue").value || "—";
-
-    if(!name){
-      alert("Ingresa el nombre del lead.");
-      return;
-    }
-
-    const flag=country==="Chile" ? "🇨🇱" : "🇪🇸";
-
-    const row=document.createElement("tr");
-
-    row.innerHTML=`
-      <td>${escapeHTML(name)}</td>
-      <td>${escapeHTML(company || "—")}</td>
-      <td>${escapeHTML(service)}</td>
-      <td>${flag} ${escapeHTML(country)}</td>
-      <td><span class="badge badge-new">Nuevo</span></td>
-      <td>${escapeHTML(value)}</td>
-    `;
-
-    document.getElementById("allLeads").prepend(row);
-
-    const current=parseInt(document.getElementById("leadCount").textContent);
-    document.getElementById("leadCount").textContent=current+1;
-
-    closeLeadModal();
-    showPage("leads");
-
-    document.querySelectorAll(".nav-item").forEach(i=>{
-      i.classList.toggle("active",i.dataset.page==="leads");
-    });
-
-    document.getElementById("leadName").value="";
-    document.getElementById("leadCompany").value="";
-    document.getElementById("leadEmail").value="";
-    document.getElementById("leadPhone").value="";
-    document.getElementById("leadValue").value="";
-  }
-
-  function escapeHTML(str){
-    return String(str)
-      .replaceAll("&","&amp;")
-      .replaceAll("<","&lt;")
-      .replaceAll(">","&gt;")
-      .replaceAll('"',"&quot;")
-      .replaceAll("'","&#039;");
-  }
+  // Search global
+  document.querySelector('.search').addEventListener('input',e=>{const q=e.target.value.toLowerCase();document.querySelectorAll('#allLeads tr').forEach(r=>r.style.display=r.textContent.toLowerCase().includes(q)?'':'none');if(q)showPage('leads');});
+  // logout button
+  const ua=document.querySelector('.user-mini');if(ua){ua.style.cursor='pointer';ua.title='Cerrar sesión';ua.onclick=()=>{if(confirm('¿Cerrar sesión?'))logout();};}
 
 </script>
 
+<style>
+.badge-lost{background:#ffe8e8;color:#a52a2a}.clickable-row{cursor:pointer}.clickable-row:hover{background:#f5fbfd}.subline{display:block;color:#81939e;margin-top:3px}.stage{min-height:260px}.deal{cursor:grab}.deal b{display:block;margin-top:8px;color:#0a9fbd}.client-actions{display:flex;gap:8px;margin-top:12px}.client-actions a,.quick-actions a{padding:9px 12px;border:1px solid #d8e5e9;border-radius:9px;text-decoration:none;color:#163947;font-size:12px;font-weight:800}.drawer360{position:fixed;z-index:3000;top:0;right:-620px;width:min(600px,95vw);height:100vh;background:#fff;box-shadow:-20px 0 60px #0b283433;transition:.28s;padding:28px;overflow:auto}.drawer360.open{right:0}.drawer-head{display:flex;justify-content:space-between;border-bottom:1px solid #e6eef1;padding-bottom:18px}.drawer-head button{border:0;background:none;font-size:22px;cursor:pointer}.drawer-head small{color:#00a9c7;font-weight:900}.quick-actions{display:flex;gap:10px;margin:20px 0}.detail-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.detail-grid div{background:#f6fafb;padding:13px;border-radius:10px}.detail-grid b,.detail-grid span{display:block}.detail-grid span{margin-top:5px;color:#617984}.drawer-label{display:block;font-weight:800;margin:20px 0 8px}.drawer360 textarea{width:100%;min-height:90px;padding:12px;border:1px solid #d8e5e9;border-radius:10px;margin-bottom:10px}.activity-title{display:flex;justify-content:space-between;align-items:center;margin-top:28px}.activity-title button{border:0;background:#e9f9fc;color:#078aa3;padding:9px 12px;border-radius:9px;font-weight:800}.activity{display:flex;gap:12px;padding:14px 0;border-bottom:1px solid #edf2f4}.activity i{width:10px;height:10px;border-radius:50%;background:#05b7d4;margin-top:5px}.activity strong,.activity span{display:block}.activity span{font-size:12px;color:#84959e;margin-top:4px}.quick-modal{position:fixed;z-index:3100;inset:0;background:#071e2a88;display:none;align-items:center;justify-content:center}.quick-modal.show{display:flex}.quick-box{width:min(460px,92vw);background:#fff;padding:26px;border-radius:18px}.quick-box input,.quick-box select{width:100%;padding:12px;margin:8px 0;border:1px solid #d8e5e9;border-radius:9px}.tasks-dynamic{margin-top:20px}@media(max-width:750px){.detail-grid{grid-template-columns:1fr}.drawer360{padding:18px}}
+</style><div id="drawer360" class="drawer360"><div id="drawerBody"></div></div><div id="quickModal" class="quick-modal" onclick="if(event.target===this)this.classList.remove('show')"><div id="quickBody" class="quick-box"></div></div>
 </body>
 </html>
