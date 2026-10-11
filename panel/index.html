@@ -372,6 +372,8 @@
       justify-content:center;
     }
 
+    .metric-icon svg{width:21px;height:21px;fill:none;stroke:#119fe2;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round;display:block;}
+
     .metric-number{
       font-size:28px;
       font-weight:900;
@@ -1107,7 +1109,7 @@
           <div class="metric">
             <div class="metric-top">
               Leads
-              <div class="metric-icon">◎</div>
+              <div class="metric-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M19 8v6M22 11h-6"/></svg></div>
             </div>
             <div class="metric-number" id="leadCount">28</div>
             <div class="up">↑ 8 este mes</div>
@@ -1116,7 +1118,7 @@
           <div class="metric">
             <div class="metric-top">
               Clientes
-              <div class="metric-icon">♙</div>
+              <div class="metric-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="7" r="4"/><path d="M2 21v-2a7 7 0 0 1 14 0v2"/><path d="M19 8v6M22 11h-6"/></svg></div>
             </div>
             <div class="metric-number">14</div>
             <div class="up">↑ 3 este mes</div>
@@ -1125,7 +1127,7 @@
           <div class="metric">
             <div class="metric-top">
               Ventas
-              <div class="metric-icon">$</div>
+              <div class="metric-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M3 9h18"/><path d="M16 14h2"/></svg></div>
             </div>
             <div class="metric-number">€4.250</div>
             <div class="up">↑ 18% este mes</div>
@@ -1134,7 +1136,7 @@
           <div class="metric">
             <div class="metric-top">
               Conversión
-              <div class="metric-icon">%</div>
+              <div class="metric-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 5 5 19"/><circle cx="7" cy="7" r="2.5"/><circle cx="17" cy="17" r="2.5"/></svg></div>
             </div>
             <div class="metric-number">32%</div>
             <div class="up">↑ 4,2%</div>
@@ -2073,6 +2075,133 @@ zxSetStatus=async function(id,status){
 const _renderAllTop=renderAll;
 renderAll=function(){_renderAllTop();zxModernizeChrome()}
 zxModernizeChrome();
+</script>
+
+
+
+<style id="zx-v3-hotfix-desktop-icons">
+/* V3.1 hotfix: desktop SVG sizing + mobile-only More button */
+.zx-more-nav{display:none!important;}
+.nav-icon svg,.metric-icon svg{width:20px!important;height:20px!important;display:block!important;stroke:#178fbd!important;fill:none!important;}
+.metric-icon{color:#178fbd!important;background:#e6f6fd!important;}
+.new-button svg{width:18px!important;height:18px!important;display:block!important;flex:0 0 18px!important;stroke:currentColor!important;fill:none!important;}
+.zx-client-toolbar>.new-button{display:inline-flex!important;align-items:center!important;justify-content:center!important;gap:8px!important;width:auto!important;min-width:158px!important;height:44px!important;padding:0 16px!important;font-size:14px!important;line-height:1!important;}
+@media (max-width:760px){
+  .zx-more-nav{display:flex!important;}
+  .metric-icon svg{width:22px!important;height:22px!important;}
+  .zx-client-toolbar>.new-button{min-width:48px!important;width:48px!important;padding:0!important;font-size:0!important;}
+}
+</style>
+<style id="zx-mobile-v3">
+/* ===== ZIEGENX CRM V3 MOBILE UX ===== */
+@media (max-width:760px){
+  html{font-size:17px}
+  body{font-size:16px;background:#f4f8fb}
+  .topbar{height:72px!important;padding:10px 14px!important}
+  .topbar .search{height:48px!important;font-size:16px!important;border-radius:14px!important;padding-left:16px!important}
+  .notification{width:48px!important;height:48px!important;border-radius:14px!important}
+  .new-button{width:auto!important;min-width:48px!important;height:48px!important;border-radius:14px!important;font-size:14px!important;padding:0 14px!important}
+  .new-button::after{display:none!important}
+  .content{padding:20px 16px 26px!important}
+  .heading{margin-bottom:20px!important;align-items:center!important}
+  .heading h1{font-size:28px!important;line-height:1.12!important;letter-spacing:-.5px}
+  .heading p{font-size:17px!important;line-height:1.42!important;margin-top:6px!important;color:#71838e!important}
+  .heading>.new-button{font-size:0!important;width:48px!important;padding:0!important;flex:0 0 48px!important}
+  .heading>.new-button:before{content:'+';font-size:28px!important;font-weight:500}
+
+  /* Bottom app navigation: 5 large destinations */
+  .sidebar{height:78px!important;padding:7px 8px!important;overflow:visible!important;justify-content:space-around!important}
+  .sidebar .nav-item{display:none!important}
+  .sidebar .nav-item[data-page="dashboard"],.sidebar .nav-item[data-page="leads"],.sidebar .nav-item[data-page="pipeline"],.sidebar .nav-item[data-page="clients"]{display:flex!important;min-width:66px!important;height:62px!important;border-radius:16px!important}
+  .sidebar .nav-item span:not(.nav-icon){font-size:11px!important;font-weight:700!important;margin-top:2px}
+  .sidebar .nav-icon{width:23px!important;height:23px!important}
+  .zx-more-nav{display:flex!important;min-width:66px;height:62px;border:0;background:transparent;color:#a9bbc6;border-radius:16px;flex-direction:column;align-items:center;justify-content:center;gap:4px;font:700 11px inherit;cursor:pointer}
+  .zx-more-nav svg{width:23px;height:23px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+  .zx-more-nav.active{background:linear-gradient(135deg,#1597ef,#20c0ee);color:#fff}
+  .main{padding-bottom:90px!important}
+
+  /* More sheet */
+  .zx-mobile-sheet{position:fixed;inset:0;z-index:5000;background:rgba(3,20,31,.42);display:none;align-items:flex-end}
+  .zx-mobile-sheet.open{display:flex}
+  .zx-mobile-sheet-card{width:100%;background:#fff;border-radius:24px 24px 0 0;padding:12px 18px calc(24px + env(safe-area-inset-bottom));box-shadow:0 -18px 50px rgba(4,28,43,.18)}
+  .zx-sheet-handle{width:42px;height:5px;border-radius:5px;background:#d8e2e8;margin:0 auto 18px}
+  .zx-sheet-title{font-size:20px;font-weight:850;color:#102635;margin:0 0 14px}
+  .zx-sheet-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .zx-sheet-item{border:1px solid #e2ebf0;background:#f8fbfd;border-radius:16px;padding:15px;display:flex;align-items:center;gap:12px;color:#173241;font-size:15px;font-weight:800;text-align:left}
+  .zx-sheet-item svg{width:23px;height:23px;stroke:#149fe7;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+
+  /* Dashboard cards */
+  .metrics{gap:12px!important}
+  .metric{padding:18px!important;border-radius:18px!important;min-height:145px!important}
+  .metric-top{font-size:14px!important}
+  .metric-number{font-size:29px!important;margin-top:20px!important}
+  .up{font-size:13px!important;margin-top:8px!important}
+  .panel{border-radius:18px!important;padding:18px!important}
+  .panel h2,.panel h3{font-size:20px!important}
+
+  /* Leads become touch-friendly cards instead of desktop table */
+  #leads .table-wrap{overflow:visible!important;background:transparent!important;border:0!important;box-shadow:none!important}
+  #leads table{min-width:0!important;width:100%!important;display:block!important}
+  #leads thead{display:none!important}
+  #leads tbody{display:grid!important;gap:12px!important}
+  #leads tr.clickable-row{display:grid!important;grid-template-columns:1fr auto!important;gap:5px 12px!important;background:#fff!important;border:1px solid #dfe9ef!important;border-radius:18px!important;padding:17px!important;box-shadow:0 5px 18px rgba(14,45,62,.045)!important}
+  #leads tr.clickable-row td{display:block!important;border:0!important;padding:0!important;font-size:14px!important;color:#70818b!important}
+  #leads tr.clickable-row td:first-child{grid-column:1/2;font-size:18px!important;color:#142c3a!important}
+  #leads tr.clickable-row td:first-child strong{font-size:18px!important}
+  #leads tr.clickable-row td:nth-child(2){grid-column:1/2;font-size:15px!important;color:#445d6b!important}
+  #leads tr.clickable-row td:nth-child(3){grid-column:1/-1;margin-top:7px;padding-top:10px!important;border-top:1px solid #edf2f5!important;color:#24404f!important;font-size:15px!important}
+  #leads tr.clickable-row td:nth-child(4){grid-column:1/2}
+  #leads tr.clickable-row td:nth-child(5){grid-column:2/3;grid-row:1/2;align-self:start}
+  #leads tr.clickable-row td:nth-child(6){grid-column:2/3;grid-row:2/3;color:#112b3a!important;font-weight:800;font-size:15px!important}
+  #leads .subline{font-size:12px!important;margin-top:3px!important}
+  #leads .panel{padding:14px!important;background:transparent!important;box-shadow:none!important;border:0!important}
+
+  /* Pipeline: readable cards, one stage per swipe */
+  #pipeline .pipeline{gap:14px!important;padding:2px 2px 16px!important;scroll-padding-left:2px!important}
+  #pipeline .stage{min-width:calc(100vw - 48px)!important;max-width:calc(100vw - 48px)!important;min-height:480px!important;border-radius:20px!important;padding:16px!important;background:#f8fbfd!important}
+  #pipeline .stage-title{font-size:18px!important;margin-bottom:14px!important;text-transform:none!important}
+  #pipeline .deal{padding:17px!important;border-radius:17px!important;margin-bottom:11px!important;box-shadow:0 5px 16px rgba(14,45,62,.05)!important}
+  #pipeline .deal strong{display:block!important;font-size:18px!important;line-height:1.25!important;margin-bottom:7px!important}
+  #pipeline .deal span{font-size:14px!important;line-height:1.35!important}
+  #pipeline .deal b{font-size:16px!important;margin-top:9px!important}
+
+  /* Tasks */
+  #tasks .tasks-dynamic{display:grid!important;gap:11px!important}
+  #tasks .task,#tasks .tasks-dynamic>.panel{border-radius:18px!important;padding:17px!important;font-size:16px!important}
+  #tasks .task-content strong{font-size:16px!important}.task-content span,.task-date{font-size:13px!important}
+
+  /* 360 record as mobile app screen */
+  #drawer360 #drawerBody{font-size:16px!important}
+  .zx360-head{padding:16px!important}.zx360-title h2{font-size:22px!important}.zx360-title p{font-size:14px!important}.zx360-title small{font-size:11px!important}
+  .zx360-body{padding:0 14px 94px!important}.zx-card{padding:17px!important;border-radius:18px!important}.zx-card h3{font-size:19px!important}
+  .zx-stagebtn{font-size:14px!important;min-width:122px!important;padding:11px 18px 11px 25px!important}
+  .zx-action-primary,.zx-action-secondary{min-height:44px!important;font-size:14px!important;border-radius:12px!important;padding:10px 14px!important}
+  .zx-tabs{top:76px!important}.zx-tab{font-size:14px!important;padding:14px!important}
+  .zx-insight{padding:15px!important;border-radius:16px!important}.zx-insight small{font-size:10px!important}.zx-insight b{font-size:21px!important}.zx-insight em{font-size:12px!important}
+  .zx-profile-line{padding:12px 0!important}.zx-profile-line b{font-size:13px!important}.zx-profile-line span{font-size:15px!important}
+  .zx-quick-grid button{min-height:52px!important;font-size:14px!important;border-radius:13px!important}
+  .zx-field label{font-size:13px!important}.zx-field input,.zx-field select,.zx-field textarea{font-size:16px!important;min-height:48px!important;border-radius:12px!important}
+}
+</style>
+<script id="zx-mobile-v3-js">
+(function(){
+ const svg={
+  more:'<svg viewBox="0 0 24 24"><circle cx="5" cy="12" r="1.5"/><circle cx="12" cy="12" r="1.5"/><circle cx="19" cy="12" r="1.5"/></svg>',
+  sales:'<svg viewBox="0 0 24 24"><path d="M12 2v20M17 6.5c0-2-2.2-3.5-5-3.5S7 4.4 7 6.5 9.2 10 12 10s5 1.5 5 3.5S14.8 17 12 17s-5-1.5-5-3.5"/></svg>',
+  tasks:'<svg viewBox="0 0 24 24"><path d="M9 6h11M9 12h11M9 18h11M3.5 6l1.5 1.5L7.5 5M3.5 12l1.5 1.5L7.5 11M3.5 18l1.5 1.5L7.5 17"/></svg>',
+  reports:'<svg viewBox="0 0 24 24"><path d="M4 19V9M10 19V5M16 19v-7M22 19V3"/></svg>',
+  projects:'<svg viewBox="0 0 24 24"><path d="M4 7h6l2 2h8v10H4z"/></svg>'
+ };
+ function setup(){
+  const sb=document.querySelector('.sidebar'); if(!sb||document.querySelector('.zx-more-nav'))return;
+  const b=document.createElement('button'); b.className='zx-more-nav'; b.type='button'; b.innerHTML=svg.more+'<span>Más</span>'; b.onclick=()=>document.querySelector('.zx-mobile-sheet')?.classList.add('open'); sb.appendChild(b);
+  const sh=document.createElement('div'); sh.className='zx-mobile-sheet'; sh.innerHTML='<div class="zx-mobile-sheet-card"><div class="zx-sheet-handle"></div><h3 class="zx-sheet-title">Más herramientas</h3><div class="zx-sheet-grid"><button class="zx-sheet-item" data-go="sales">'+svg.sales+'Ventas</button><button class="zx-sheet-item" data-go="tasks">'+svg.tasks+'Tareas</button><button class="zx-sheet-item" data-go="reports">'+svg.reports+'Reportes</button><button class="zx-sheet-item" data-go="projects">'+svg.projects+'Proyectos</button></div></div>';
+  document.body.appendChild(sh);
+  sh.addEventListener('click',e=>{if(e.target===sh)sh.classList.remove('open'); const x=e.target.closest('[data-go]');if(x){showPage(x.dataset.go);sh.classList.remove('open');b.classList.add('active')}});
+  document.querySelectorAll('.sidebar .nav-item').forEach(n=>n.addEventListener('click',()=>b.classList.remove('active')));
+ }
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',setup);else setup();
+})();
 </script>
 
 </body>
