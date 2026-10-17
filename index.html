@@ -1592,50 +1592,41 @@
       }
     }
 
-    /* ZIEGENX | Portafolio de demostraciones */
-    .zx-showcase { background: #eef5fb; color: #091627; padding: 94px 0 100px; }
-    .zx-showcase-head { display: flex; align-items: end; justify-content: space-between; gap: 28px; margin-bottom: 32px; }
-    .zx-showcase h2 { font-size: clamp(30px, 4vw, 48px); margin: 0 0 14px; line-height: 1.12; }
-    .zx-showcase-intro { max-width: 680px; font-size: 17px; line-height: 1.6; color: #52677e; }
-    .zx-showcase-link { display: inline-flex; gap: 8px; align-items: center; color: #0874c2; font-weight: 800; text-decoration: none; white-space: nowrap; padding-bottom: 6px; }
-    .zx-showcase-link:hover { text-decoration: underline; }
-    .zx-demo-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 22px; }
-    .zx-demo { border: 1px solid #dce6ef; border-radius: 23px; overflow: hidden; background: white; box-shadow: 0 14px 36px rgba(13,42,72,.07); display: flex; flex-direction: column; }
-    .zx-demo-preview { height: 212px; position: relative; overflow: hidden; padding: 22px; }
-    .zx-demo-preview:before { content: ''; position: absolute; width: 220px; height: 220px; border-radius: 50%; top: -105px; right: -70px; opacity: .17; background: currentColor; }
-    .zx-preview-window { position: relative; z-index: 1; border-radius: 11px; height: 100%; box-shadow: 0 16px 38px rgba(0,0,0,.17); overflow: hidden; background: white; transform: rotate(-2deg) translateY(13px); }
-    .zx-preview-bar { height: 27px; display: flex; align-items: center; padding: 0 12px; font-size: 10px; letter-spacing: 1px; font-weight: 900; }
-    .zx-preview-content { padding: 16px; display: grid; gap: 9px; }
-    .zx-preview-line { height: 9px; border-radius: 20px; opacity: .85; }
-    .zx-preview-line.short { width: 48%; }
-    .zx-preview-line.med { width: 72%; }
-    .zx-preview-chip { display: inline-block; border-radius: 7px; width: 82px; height: 22px; margin-top: 6px; }
-    .zx-preview-estate { background: linear-gradient(130deg,#e7eadc 0%,#d8c6aa 100%); color: #365b49; }
-    .zx-preview-estate .zx-preview-bar { background: #f8f4e9; color: #365b49; }
-    .zx-preview-estate .zx-preview-line { background: #365b49; }
-    .zx-preview-estate .zx-preview-chip { background: #365b49; }
-    .zx-preview-health { background: linear-gradient(135deg,#e6f7f7,#bfe4e1); color:#147a83; }
-    .zx-preview-health .zx-preview-bar { background: #f8fffe; color: #147a83; }
-    .zx-preview-health .zx-preview-line { background: #147a83; }
-    .zx-preview-health .zx-preview-chip { background: #147a83; }
-    .zx-preview-sales { background: linear-gradient(135deg,#dce7ff,#bacbfb); color:#3f59a5; }
-    .zx-preview-sales .zx-preview-bar { background: #f8faff; color:#3f59a5; }
-    .zx-preview-sales .zx-preview-line { background:#3f59a5; }
-    .zx-preview-sales .zx-preview-chip { background:#3f59a5; }
-    .zx-demo-body { padding: 25px; display: flex; flex-direction: column; flex: 1; }
-    .zx-demo-label { display: inline-block; width: fit-content; font-size: 11px; letter-spacing: .5px; font-weight: 800; color: #0874c2; background:#e7f5ff; border-radius: 99px; padding: 7px 10px; margin-bottom: 16px; }
-    .zx-demo-label.soon { color:#697989; background:#edf1f5; }
-    .zx-demo-body h3 { font-size: 23px; line-height: 1.2; margin-bottom: 11px; }
-    .zx-demo-body p { color:#617084; line-height: 1.6; font-size: 14px; flex: 1; }
-    .zx-demo-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 24px; }
-    .zx-demo-actions a { padding: 11px 14px; border-radius: 10px; font-weight: 800; font-size: 13px; text-decoration: none; }
-    .zx-demo-main { color:white; background:#116dea; }
-    .zx-demo-second { color:#0c5eaf; border: 1px solid #c9dcef; background:white; }
-    .zx-demo-actions a:hover { filter: brightness(.94); }
-    .zx-demo-soon { padding: 12px 0; font-size: 13px; color:#788898; font-weight: 700; }
-    .zx-showcase-note { margin-top: 21px; color:#697b8e; font-size: 12px; }
-    @media (max-width: 1030px) { .zx-demo-grid {grid-template-columns: 1fr 1fr;} .zx-showcase-head{align-items: flex-start; flex-direction: column;} }
-    @media (max-width: 700px) { .zx-demo-grid {grid-template-columns: 1fr;} .zx-showcase {padding: 70px 0;} .zx-demo-preview {height: 190px;} .zx-showcase-link { white-space: normal; } }
+
+    /* Portafolio ZIEGENX: tarjetas compactas, una acción principal */
+    .zx-showcase { background:#eef5fb; color:#0a2037; padding:76px 0 82px; }
+    .zx-showcase .eyebrow { margin-bottom:10px; }
+    .zx-showcase-head {display:flex;align-items:flex-end;justify-content:space-between;gap:22px;margin-bottom:26px;}
+    .zx-showcase h2 {font-size:clamp(30px,3.7vw,44px);line-height:1.12;margin:0 0 10px;}
+    .zx-showcase-intro {color:#587087;font-size:15px;line-height:1.55;max-width:610px;}
+    .zx-showcase-link {color:#0874c2;text-decoration:none;font-weight:750;font-size:13px;white-space:nowrap;padding-bottom:5px;}
+    .zx-showcase-link:hover {text-decoration:underline;}
+    .zx-demo-grid {display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;}
+    .zx-demo {border:1px solid #dce6ef;border-radius:18px;background:#fff;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 9px 25px rgba(8,33,58,.05);transition:transform .2s,box-shadow .2s;}
+    .zx-demo:hover {transform:translateY(-3px);box-shadow:0 14px 30px rgba(8,33,58,.10);}
+    .zx-demo-visual {height:115px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;}
+    .zx-demo-visual::before {content:'';position:absolute;width:145px;height:145px;border-radius:50%;right:-36px;top:-65px;background:rgba(255,255,255,.16);}
+    .zx-demo-visual .zx-mark {position:relative;z-index:1;font-size:35px;line-height:1;}
+    .zx-visual-inmo {background:linear-gradient(125deg,#e5e9da,#c3d3be);color:#315b48;}
+    .zx-visual-seguros {background:linear-gradient(125deg,#dbf2f2,#a8d9d6);color:#14747c;}
+    .zx-visual-tienda {background:linear-gradient(125deg,#f4ebdf,#deccb3);color:#79614b;}
+    .zx-visual-gestion {background:linear-gradient(125deg,#e4eafa,#cbd5ec);color:#58719b;}
+    .zx-demo-body {padding:19px;display:flex;flex-direction:column;flex:1;}
+    .zx-demo-label {width:max-content;font-size:10px;font-weight:800;color:#0669af;background:#e9f4ff;border-radius:100px;padding:5px 9px;letter-spacing:.25px;margin-bottom:12px;}
+    .zx-demo-label.soon {background:#eef1f4;color:#798798;}
+    .zx-demo-body h3 {font-size:19px;line-height:1.24;margin:0 0 10px;}
+    .zx-demo-body p {font-size:13px;line-height:1.5;color:#657589;margin:0 0 17px;flex:1;}
+    .zx-demo-main {display:inline-flex;align-items:center;justify-content:center;border-radius:10px;padding:11px 15px;background:#126ee6;color:white;text-decoration:none;font-size:13px;font-weight:800;align-self:flex-start;}
+    .zx-demo-main:hover {background:#0754ba;}
+    .zx-demo-links {display:flex;gap:15px;flex-wrap:wrap;margin-top:13px;}
+    .zx-demo-links a,.zx-demo-links span {font-size:12px;color:#57748d;text-decoration:none;font-weight:650;}
+    .zx-demo-links a:hover {color:#0066bc;text-decoration:underline;}
+    .zx-demo-upcoming {background:#fbfcfe;}
+    .zx-demo-upcoming .zx-demo-body p {color:#8895a4;}
+    .zx-demo-soon {font-size:13px;font-weight:750;color:#8391a0;margin-top:auto;}
+    .zx-showcase-note {margin-top:18px;color:#6a8094;font-size:11px;line-height:1.5;}
+    @media(max-width:1050px){.zx-demo-grid{grid-template-columns:repeat(2,minmax(0,1fr));}}
+    @media(max-width:620px){.zx-demo-grid{grid-template-columns:1fr;gap:13px;}.zx-showcase{padding:60px 0;}.zx-showcase-head{align-items:flex-start;flex-direction:column;gap:12px;}.zx-demo-visual{height:90px;}.zx-demo-body{padding:17px;}.zx-showcase-link{white-space:normal;}}
   </style>
 </head>
 
@@ -1739,49 +1730,62 @@
 
 
 
-    <!-- Catálogo ZIEGENX: demostraciones por sector -->
+    <!-- Catálogo de demos · acceso claro por sector -->
     <section class="zx-showcase" id="demostraciones" aria-labelledby="zx-demos-title">
       <div class="container">
-        <p class="eyebrow blue">EXPLORA SOLUCIONES REALES</p>
+        <p class="eyebrow blue">DEMOSTRACIONES ZIEGENX</p>
         <div class="zx-showcase-head">
           <div>
-            <h2 id="zx-demos-title">No imagines tu próxima web. <span style="color:#107cde">Pruébala.</span></h2>
-            <p class="zx-showcase-intro">Conoce diseños y herramientas creadas por ZIEGENX. Entra a una demo, revisa su estilo y descubre cómo podría verse tu negocio en internet.</p>
+            <h2 id="zx-demos-title">Elige tu sector. <span style="color:#107cde">Prueba una web.</span></h2>
+            <p class="zx-showcase-intro">Explora nuestras páginas de muestra y descubre cómo podría verse tu negocio.</p>
           </div>
-          <a class="zx-showcase-link" href="/soluciones/">Ver todo el catálogo &rarr;</a>
+          <a class="zx-showcase-link" href="/soluciones/">Catálogo completo ↗</a>
         </div>
         <div class="zx-demo-grid">
           <article class="zx-demo">
-            <div class="zx-demo-preview zx-preview-estate" aria-hidden="true">
-              <div class="zx-preview-window"><div class="zx-preview-bar">COSTA &amp; CIUDAD &nbsp; / &nbsp; PROPIEDADES</div><div class="zx-preview-content"><div class="zx-preview-line med"></div><div class="zx-preview-line"></div><div class="zx-preview-line short"></div><span class="zx-preview-chip"></span></div></div>
-            </div>
+            <div class="zx-demo-visual zx-visual-inmo" aria-hidden="true"><span class="zx-mark">⌂</span></div>
             <div class="zx-demo-body">
               <span class="zx-demo-label">DEMO DISPONIBLE</span>
-              <h3>Corredoras de propiedades</h3>
-              <p>Una web inmobiliaria con formulario, propiedades de muestra y un CRM interactivo. También puedes comparar tres estilos de diseño.</p>
-              <div class="zx-demo-actions">
-                <a class="zx-demo-main" href="/corredor/" target="_blank" rel="noopener">Ver página web ↗</a>
-                <a class="zx-demo-second" href="/corredor/ejemplos/" target="_blank" rel="noopener">3 diseños ↗</a>
-                <a class="zx-demo-second" href="/corredor/?vista=crm" target="_blank" rel="noopener">Probar CRM ↗</a>
-              </div>
+              <h3>Inmobiliarias</h3>
+              <p>Web de propiedades con formularios y un CRM de demostración.</p>
+              <a class="zx-demo-main" href="/corredor/" target="_blank" rel="noopener">Ver demo ↗</a>
+              <div class="zx-demo-links"><a href="/corredor/?vista=crm" target="_blank" rel="noopener">Ver CRM</a><a href="/corredor/ejemplos/" target="_blank" rel="noopener">3 estilos</a></div>
             </div>
           </article>
           <article class="zx-demo">
-            <div class="zx-demo-preview zx-preview-health" aria-hidden="true">
-              <div class="zx-preview-window"><div class="zx-preview-bar">SALUD &nbsp; / &nbsp; ASESORÍA</div><div class="zx-preview-content"><div class="zx-preview-line"></div><div class="zx-preview-line short"></div><div class="zx-preview-line med"></div><span class="zx-preview-chip"></span></div></div>
+            <div class="zx-demo-visual zx-visual-seguros" aria-hidden="true"><span class="zx-mark">◇</span></div>
+            <div class="zx-demo-body">
+              <span class="zx-demo-label">PROYECTO PUBLICADO</span>
+              <h3>Seguros y asesoría</h3>
+              <p>Dinero a Favor: web comercial enfocada en consultas y contacto.</p>
+              <a class="zx-demo-main" href="https://www.dineroafavor.cl/" target="_blank" rel="noopener noreferrer">Ver proyecto ↗</a>
+              <div class="zx-demo-links"><span>Salud / Isapres: próximamente</span></div>
             </div>
-            <div class="zx-demo-body"><span class="zx-demo-label soon">EN PREPARACIÓN</span><h3>Salud y asesoría Isapres</h3><p>Una futura demostración para presentar servicios de asesoría, solicitar contactos y organizar seguimientos comerciales, sin mostrar datos de pacientes.</p><div class="zx-demo-actions"><span class="zx-demo-soon">Próximamente: web + CRM comercial</span></div></div>
           </article>
           <article class="zx-demo">
-            <div class="zx-demo-preview zx-preview-sales" aria-hidden="true">
-              <div class="zx-preview-window"><div class="zx-preview-bar">VENTAS &nbsp; / &nbsp; CRM</div><div class="zx-preview-content"><div class="zx-preview-line med"></div><div class="zx-preview-line"></div><div class="zx-preview-line short"></div><span class="zx-preview-chip"></span></div></div>
+            <div class="zx-demo-visual zx-visual-tienda" aria-hidden="true"><span class="zx-mark">▣</span></div>
+            <div class="zx-demo-body">
+              <span class="zx-demo-label">DEMO DISPONIBLE</span>
+              <h3>Tiendas y negocios</h3>
+              <p>NOVA Store: catálogo con productos y bolsa de pedidos de muestra.</p>
+              <a class="zx-demo-main" href="/negocios/" target="_blank" rel="noopener">Ver demo ↗</a>
+              <div class="zx-demo-links"><span>Catálogo comercial sin pagos online</span></div>
             </div>
-            <div class="zx-demo-body"><span class="zx-demo-label soon">EN PREPARACIÓN</span><h3>Captación y gestión comercial</h3><p>Una futura solución para campañas, prospección comercial y seguimiento de oportunidades en un panel organizado.</p><div class="zx-demo-actions"><span class="zx-demo-soon">Próximamente: landing + CRM de ventas</span></div></div>
+          </article>
+          <article class="zx-demo zx-demo-upcoming">
+            <div class="zx-demo-visual zx-visual-gestion" aria-hidden="true"><span class="zx-mark">▥</span></div>
+            <div class="zx-demo-body">
+              <span class="zx-demo-label soon">EN PREPARACIÓN</span>
+              <h3>Gestión comercial</h3>
+              <p>Próxima demostración para captar oportunidades y organizar ventas.</p>
+              <span class="zx-demo-soon">Próximamente</span>
+            </div>
           </article>
         </div>
-        <p class="zx-showcase-note">Las demos utilizan ejemplos ficticios para ilustrar el diseño y el funcionamiento; no representan operaciones reales ni sistemas listos para producción.</p>
+        <p class="zx-showcase-note">Las demostraciones ilustran diseños y funciones de ejemplo. No son tiendas o sistemas operativos para clientes reales.</p>
       </div>
     </section>
+
 
     <section class="section light" id="servicios">
       <div class="container">
