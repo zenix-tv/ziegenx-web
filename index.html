@@ -1604,13 +1604,17 @@
     .zx-demo-grid {display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;}
     .zx-demo {border:1px solid #dce6ef;border-radius:18px;background:#fff;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 9px 25px rgba(8,33,58,.05);transition:transform .2s,box-shadow .2s;}
     .zx-demo:hover {transform:translateY(-3px);box-shadow:0 14px 30px rgba(8,33,58,.10);}
-    .zx-demo-visual {height:115px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;}
-    .zx-demo-visual::before {content:'';position:absolute;width:145px;height:145px;border-radius:50%;right:-36px;top:-65px;background:rgba(255,255,255,.16);}
-    .zx-demo-visual .zx-mark {position:relative;z-index:1;font-size:35px;line-height:1;}
-    .zx-visual-inmo {background:linear-gradient(125deg,#e5e9da,#c3d3be);color:#315b48;}
-    .zx-visual-seguros {background:linear-gradient(125deg,#dbf2f2,#a8d9d6);color:#14747c;}
-    .zx-visual-tienda {background:linear-gradient(125deg,#f4ebdf,#deccb3);color:#79614b;}
-    .zx-visual-gestion {background:linear-gradient(125deg,#e4eafa,#cbd5ec);color:#58719b;}
+    /* Cabeceras editoriales: fotografías reales en lugar de símbolos geométricos */
+    .zx-demo-visual {height:154px;position:relative;overflow:hidden;background:#dce5ed;}
+    .zx-demo-visual img {display:block;width:100%;height:100%;object-fit:cover;object-position:center;transition:transform .4s ease;}
+    .zx-demo:hover .zx-demo-visual img {transform:scale(1.055);}
+    .zx-demo-visual::after {content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(6,18,32,.02),rgba(6,18,32,.19));pointer-events:none;}
+    .zx-demo-visual .zx-mark {display:none;}
+    .zx-visual-inmo {background:#dce7e0;}
+    .zx-visual-seguros {background:#dae9e7;}
+    .zx-visual-tienda {background:#e9e1d6;}
+    .zx-visual-gestion {background:#dee5ee;}
+    .zx-demo-upcoming .zx-demo-visual img {filter:saturate(.62);opacity:.79;}
     .zx-demo-body {padding:19px;display:flex;flex-direction:column;flex:1;}
     .zx-demo-label {width:max-content;font-size:10px;font-weight:800;color:#0669af;background:#e9f4ff;border-radius:100px;padding:5px 9px;letter-spacing:.25px;margin-bottom:12px;}
     .zx-demo-label.soon {background:#eef1f4;color:#798798;}
@@ -1626,7 +1630,7 @@
     .zx-demo-soon {font-size:13px;font-weight:750;color:#8391a0;margin-top:auto;}
     .zx-showcase-note {margin-top:18px;color:#6a8094;font-size:11px;line-height:1.5;}
     @media(max-width:1050px){.zx-demo-grid{grid-template-columns:repeat(2,minmax(0,1fr));}}
-    @media(max-width:620px){.zx-demo-grid{grid-template-columns:1fr;gap:13px;}.zx-showcase{padding:60px 0;}.zx-showcase-head{align-items:flex-start;flex-direction:column;gap:12px;}.zx-demo-visual{height:90px;}.zx-demo-body{padding:17px;}.zx-showcase-link{white-space:normal;}}
+    @media(max-width:620px){.zx-demo-grid{grid-template-columns:1fr;gap:13px;}.zx-showcase{padding:60px 0;}.zx-showcase-head{align-items:flex-start;flex-direction:column;gap:12px;}.zx-demo-visual{height:150px;}.zx-demo-body{padding:17px;}.zx-showcase-link{white-space:normal;}}
   </style>
 </head>
 
@@ -1743,7 +1747,7 @@
         </div>
         <div class="zx-demo-grid">
           <article class="zx-demo">
-            <div class="zx-demo-visual zx-visual-inmo" aria-hidden="true"><span class="zx-mark">⌂</span></div>
+            <div class="zx-demo-visual zx-visual-inmo"><img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=820&q=82&auto=format&fit=crop" alt="Fotografía de una vivienda contemporánea" loading="lazy" referrerpolicy="no-referrer" /></div>
             <div class="zx-demo-body">
               <span class="zx-demo-label">DEMO DISPONIBLE</span>
               <h3>Inmobiliarias</h3>
@@ -1753,7 +1757,7 @@
             </div>
           </article>
           <article class="zx-demo">
-            <div class="zx-demo-visual zx-visual-seguros" aria-hidden="true"><span class="zx-mark">◇</span></div>
+            <div class="zx-demo-visual zx-visual-seguros"><img src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?w=820&q=82&auto=format&fit=crop" alt="Oficina moderna de asesoría comercial" loading="lazy" referrerpolicy="no-referrer" /></div>
             <div class="zx-demo-body">
               <span class="zx-demo-label">PROYECTO PUBLICADO</span>
               <h3>Seguros y asesoría</h3>
@@ -1763,7 +1767,7 @@
             </div>
           </article>
           <article class="zx-demo">
-            <div class="zx-demo-visual zx-visual-tienda" aria-hidden="true"><span class="zx-mark">▣</span></div>
+            <div class="zx-demo-visual zx-visual-tienda"><img src="https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?w=820&q=82&auto=format&fit=crop" alt="Productos de cosmética en una tienda" loading="lazy" referrerpolicy="no-referrer" /></div>
             <div class="zx-demo-body">
               <span class="zx-demo-label">DEMO DISPONIBLE</span>
               <h3>Tiendas y negocios</h3>
@@ -1773,7 +1777,7 @@
             </div>
           </article>
           <article class="zx-demo zx-demo-upcoming">
-            <div class="zx-demo-visual zx-visual-gestion" aria-hidden="true"><span class="zx-mark">▥</span></div>
+            <div class="zx-demo-visual zx-visual-gestion"><img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=820&q=82&auto=format&fit=crop" alt="Pantalla de análisis y gestión de negocios" loading="lazy" referrerpolicy="no-referrer" /></div>
             <div class="zx-demo-body">
               <span class="zx-demo-label soon">EN PREPARACIÓN</span>
               <h3>Gestión comercial</h3>
