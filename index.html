@@ -1667,6 +1667,35 @@
     .zx-showcase-note {margin-top:18px;color:#6a8094;font-size:11px;line-height:1.5;}
     @media(max-width:1050px){.zx-demo-grid{grid-template-columns:repeat(2,minmax(0,1fr));}}
     @media(max-width:620px){.zx-demo-grid{grid-template-columns:1fr;gap:13px;}.zx-showcase{padding:60px 0;}.zx-showcase-head{align-items:flex-start;flex-direction:column;gap:12px;}.zx-demo-visual{height:150px;}.zx-demo-body{padding:17px;}.zx-showcase-link{white-space:normal;}}
+    /* Enlace interno a la página comercial de Chile (SEO) */
+    .zx-chile-link {
+      margin-top: 28px;
+      padding: 23px 27px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 22px;
+      border: 1px solid #cde7fa;
+      border-radius: 18px;
+      background: #eaf6ff;
+    }
+    .zx-chile-link h3 { color: #0b3154; font-size: 19px; margin-bottom: 6px; }
+    .zx-chile-link p { color: #42637d; line-height: 1.5; font-size: 14px; }
+    .zx-chile-link a {
+      flex: 0 0 auto;
+      background: #126ee6;
+      border-radius: 11px;
+      padding: 13px 17px;
+      color: #fff;
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 700;
+    }
+    .zx-chile-link a:hover { background: #0754ba; }
+    @media (max-width: 680px) {
+      .zx-chile-link { flex-direction: column; align-items: stretch; padding: 22px; }
+      .zx-chile-link a { text-align: center; }
+    }
   </style>
   <!-- Identidad visual oficial ZIEGENX -->
   <link rel="icon" type="image/x-icon" href="/favicon.ico" />
@@ -1867,6 +1896,15 @@
           </article>
 
         </div>
+
+        <!-- Página específica para emprendedores y negocios en Chile -->
+        <aside class="zx-chile-link" aria-label="Soluciones para negocios en Chile">
+          <div>
+            <h3>¿Tienes un negocio en Chile?</h3>
+            <p>Conoce nuestra página web profesional con WhatsApp y una herramienta para administrar tus clientes, desde $199.000 CLP.</p>
+          </div>
+          <a href="/paginas-web-para-negocios/">Ver soluciones para Chile ↗</a>
+        </aside>
       </div>
     </section>
 
