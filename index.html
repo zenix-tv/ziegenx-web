@@ -1720,10 +1720,10 @@
       </nav>
 
       <div class="market-switch" aria-label="Selecciona mercado">
-        <button type="button" class="market-btn active" data-market="es" aria-pressed="true">
+        <button type="button" class="market-btn" data-market="es" aria-pressed="false">
           <span class="fi fi-es"></span><span class="market-label">España</span>
         </button>
-        <button type="button" class="market-btn" data-market="cl" aria-pressed="false">
+        <button type="button" class="market-btn active" data-market="cl" aria-pressed="true">
           <span class="fi fi-cl"></span><span class="market-label">Chile</span>
         </button>
       </div>
@@ -1965,13 +1965,13 @@
           <div class="premium-price">
             <span class="price-label" id="marketPriceLabel">PRECIO LANZAMIENTO · PAGO ÚNICO</span>
             <div class="price-regular" id="regularPriceRow">
-              Precio regular <s id="marketRegularPrice">299 €</s>
+              Precio regular <s id="marketRegularPrice">$249.000</s>
             </div>
-            <strong id="marketPrice">249 €</strong>
-            <small id="marketPriceSub">España · Precio lanzamiento · Sin mensualidades obligatorias</small>
-            <div class="saving-badge" id="marketSaving">Ahorras 50 €</div>
-            <div class="price-includes" id="marketIncludes">Web + CRM + formulario conectado + WhatsApp + dominio .com primer año.</div>
-            <div class="market-note" id="marketDomainNote">Dominio .com incluido el primer año.</div>
+            <strong id="marketPrice">$199.000</strong>
+            <small id="marketPriceSub">Chile · Precio lanzamiento · Sin mensualidades obligatorias</small>
+            <div class="saving-badge" id="marketSaving">Ahorras $50.000</div>
+            <div class="price-includes" id="marketIncludes">Web profesional + CRM + formulario conectado + WhatsApp + dominio .com primer año + configuración y publicación.</div>
+            <div class="market-note" id="marketDomainNote">Dominio .com incluido el primer año · .cl opcional y cotizado aparte.</div>
             <a class="price-demo-link" href="#crmDemo">▶ Ver cómo funciona</a>
           </div>
         </div>
@@ -2164,7 +2164,7 @@
         </div>
 
         <form id="leadForm" class="contact-form">
-          <input type="hidden" id="marketField" name="mercado" value="España" />
+          <input type="hidden" id="marketField" name="mercado" value="Chile" />
 
           <div class="form-grid">
 
@@ -2184,17 +2184,17 @@
                 <div class="country-picker" id="countryPicker">
                   <button type="button" class="country-trigger" id="countryTrigger" aria-haspopup="listbox" aria-expanded="false">
                     <span class="country-current">
-                      <span class="fi fi-es" id="countryFlag"></span>
-                      <span id="countryDial">+34</span>
+                      <span class="fi fi-cl" id="countryFlag"></span>
+                      <span id="countryDial">+56</span>
                     </span>
                     <span class="country-chevron">▼</span>
                   </button>
 
                   <div class="country-menu" id="countryMenu" role="listbox" aria-label="Selecciona tu país">
-                    <button type="button" class="country-option active" data-code="+34" data-country="España" data-flag="es"><span class="fi fi-es"></span><span class="country-name">España</span><span class="country-dial">+34</span></button>
-                    <button type="button" class="country-option" data-code="+56" data-country="Chile" data-flag="cl"><span class="fi fi-cl"></span><span class="country-name">Chile</span><span class="country-dial">+56</span></button>
+                    <button type="button" class="country-option" data-code="+34" data-country="España" data-flag="es"><span class="fi fi-es"></span><span class="country-name">España</span><span class="country-dial">+34</span></button>
+                    <button type="button" class="country-option active" data-code="+56" data-country="Chile" data-flag="cl"><span class="fi fi-cl"></span><span class="country-name">Chile</span><span class="country-dial">+56</span></button>
                   </div>
-                  <input type="hidden" id="countryCode" name="prefijo" value="+34" />
+                  <input type="hidden" id="countryCode" name="prefijo" value="+56" />
                 </div>
                 <input
                   type="tel"
@@ -2202,7 +2202,7 @@
                   name="telefono_local"
                   inputmode="tel"
                   autocomplete="tel-national"
-                  placeholder="612 345 678"
+                  placeholder="9 1234 5678"
                   pattern="[0-9 ()-]{6,18}"
                   required
                 />
@@ -2298,7 +2298,7 @@
 
 
   <!-- CAMBIA ESTE NÚMERO POR TU WHATSAPP REAL -->
-  <a href="https://wa.me/34604110307" target="_blank" class="whatsapp" id="whatsappFloat" rel="noopener">
+  <a href="https://wa.me/56968531333" target="_blank" class="whatsapp" id="whatsappFloat" rel="noopener">
     WhatsApp
   </a>
 
@@ -2422,9 +2422,12 @@
       "+56": "9 1234 5678"
     };
 
-    // Mercado inicial: España
-    whatsappFloat.href = `https://wa.me/${markets.es.whatsapp}?text=${encodeURIComponent(markets.es.whatsappMessage)}`;
-    whatsappFloat.setAttribute("aria-label", "Contactar ZIEGENX por WhatsApp en España");
+    // Configurar Chile por defecto; el visitante puede cambiar a España con la bandera.
+    setMarket("cl");
+
+    // Mercado inicial: Chile
+    whatsappFloat.href = `https://wa.me/${markets.cl.whatsapp}?text=${encodeURIComponent(markets.cl.whatsappMessage)}`;
+    whatsappFloat.setAttribute("aria-label", "Contactar ZIEGENX por WhatsApp en Chile");
 
     countryTrigger.addEventListener("click", function () {
       const isOpen = countryPicker.classList.toggle("open");
@@ -2509,7 +2512,7 @@
         await crmDb.collection("leads").add(lead);
         status.textContent = "";
         form.reset();
-        setMarket("es");
+        setMarket("cl");
         form.style.display = "none";
         successPanel.classList.add("active");
         successPanel.scrollIntoView({ behavior: "smooth", block: "center" });
